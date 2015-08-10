@@ -89,7 +89,7 @@ a:focus {
 }
 
 .navbar-custom a {
-    color: #fff;
+    color: #171717;
 }
 
 .navbar-custom .nav li a {
@@ -146,9 +146,9 @@ a:focus {
     height: auto;
     padding: 100px 0;
     text-align: center;
-    color: #fff;
-    background: url(../img/intro-bg.jpg) no-repeat bottom center scroll;
-    background-color: #000;
+    color: #111111;
+    background: url(../img/viz_pic.png) no-repeat bottom center scroll;
+    background-color: slategray;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
