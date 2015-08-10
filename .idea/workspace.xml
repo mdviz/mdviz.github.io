@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e6949c6a-2567-4eb3-9514-b78c1c26dc6c" name="Default" comment="" />
+    <list default="true" id="e6949c6a-2567-4eb3-9514-b78c1c26dc6c" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/CNAME" afterPath="" />
+    </list>
     <ignored path="mdviz.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
