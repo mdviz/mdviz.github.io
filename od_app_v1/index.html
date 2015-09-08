@@ -7,6 +7,9 @@
     <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="libs/queue/queue.min.js"></script>
     <script src="libs/leaflet-0.7.3/leaflet.js"></script>
+
+    <!--SOURCE for bundling algorithm https://github.com/upphiminn/d3.ForceBundle-->
+
     <script type="text/javascript" src="libs/d3-ForceEdgeBundling.js"></script>
 
     <!--Viz Scripts-->
@@ -42,7 +45,9 @@
         g:undefined,
         maxFlow:undefined};
 
-    //Source http://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs
+    /*
+    Source http://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs
+     */
     function rad2degr(rad) { return rad * 180 / Math.PI; }
     function degr2rad(degr) { return degr * Math.PI / 180; }
 
