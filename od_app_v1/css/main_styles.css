@@ -1,6 +1,6 @@
 body{
     width: 1200px;
-    height: 1900px;
+    height: 1500px;
 }
 
 #sourceMap {
@@ -13,6 +13,11 @@ body{
     font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
     font-weight: bold;
     font-size: 20px;
+}
+
+ul{
+    font-weight: normal;
+    font-size: 15px;
 }
 
 svg {
