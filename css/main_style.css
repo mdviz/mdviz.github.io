@@ -1,0 +1,9 @@
+a.page-scroll {
+    color: #000000;
+    border-bottom: 1px #000000 solid;
+
+}
+
+a.page-scroll:hover{
+    color: red;
+}
