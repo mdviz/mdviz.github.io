@@ -19,7 +19,7 @@
     <title></title>
 </head>
 <body>
-<div id = 'context'>Inital pass at visualizing snow data from <a href="https://www.ncdc.noaa.gov/snow-and-ice/daily-snow/">NOAA</a>. </div>
+<div id = 'context'>Inital pass at visualizing snow data (2006-2014) from <a href="https://www.ncdc.noaa.gov/snow-and-ice/daily-snow/">NOAA</a>. </div>
 <div id="sourceMap"></div>
 <div>
     <strong>Next Steps</strong>
@@ -28,11 +28,12 @@
         <li>Add slider for moving through values</li>
         <li>Add second frame to allow comparison across years/months</li>
         <li>Add some summary chart statistics</li>
+        <li>Convert csv files into aggregated JSON</li>
     </ul>
 
 </div>
 <script>
-
+    //Variables
     map = L.map("sourceMap", {zoomControl:false});
     var first = 0;
     var increment = 0;
@@ -41,16 +42,15 @@
     var info = L.control({position: 'bottomleft'});
     var incrementForward = true;
     var Lpoints;
+    var Interval;
+    var snow;
+
     function make(dataPath) {
         heatData = [];
         //Load the Data
         queue()
                 .defer(d3.csv,dataPath)
                 .await(ready);
-        //Variables
-
-
-        var snow;
 
         function ready(error, data) {
             snow = data;
@@ -88,7 +88,6 @@
                 });
 
 
-
                 map.addLayer(Lpoints)
 
                     heat = L.heatLayer(heatData, {
@@ -119,12 +118,12 @@
                     maxZoom: 15,
                 }).addTo(map);
             }
-
-
+            //Update the year and month in the legend box
             updateDisplay(dataPath);
 
         }
     }
+
     //Pad with zeros
     function pad(num, size) {
         var s = "000000000" + num;
@@ -132,29 +131,28 @@
     }
 
 
-
     fileList = [];
+    for (i=2006; i<2015; i++){
+        for (j=1; j<13; j++){
+            fileList.push("c_" + pad(j,2)+ "_"+i)
 
-        for (i=2006; i<2015; i++){
-            for (j=1; j<13; j++){
-                fileList.push("c_" + pad(j,2)+ "_"+i)
-
-            }
         }
+    }
 
     make("cleaned/" + fileList[0] + ".csv");
 
     function run(){
         increment = incrementForward ? increment + 1 : increment - 1;
-        console.log("cleaned/" + fileList[increment] + ".csv")
-        $(".info")
-        make("cleaned/" + fileList[increment] + ".csv")
+        if (increment >= 0 && increment < 108){
+            make("cleaned/" + fileList[increment] + ".csv")
+        } else {
+            clearInterval(Interval);
+            increment = increment >=108 ? 107 : 0;
+        }
     }
 
 
     function updateDisplay(path){
-
-        console.log(path)
         $('.info').remove();
         var legendText = path.split("/")[1].split('_');
         legendText = [legendText[2].split(".")[0], legendText[1]]
@@ -175,12 +173,12 @@
 
     }
 
-    var Interval;
+
     function start(){
         incrementForward = true;
         Interval = setInterval(run, 1000)
     }
-    start()
+
     function pause(){
         clearInterval(Interval)
     }
@@ -190,6 +188,7 @@
         Interval = setInterval(run, 1000)
     }
 
+    start()
 </script>
 </body>
 </html>
