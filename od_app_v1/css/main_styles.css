@@ -1,11 +1,28 @@
 body{
-    width: 1200px;
+    width: 1400px;
     height: 1500px;
+    padding: 20px;
 }
 
 #sourceMap {
-    width: 100%;
+    width: 60%;
     height: 60%;
+}
+
+#selectNodes{
+    width: 40%;
+    height: 60%;
+}
+
+.selectNodes:hover{
+    stroke: yellow;
+    stroke-width: 2;
+}
+
+selectedOnMap{
+    stroke: yellow;
+    stroke-width: 2;
+
 }
 
 #mainTitle {
@@ -29,12 +46,28 @@ path {
     fill-opacity: .2;
 }
 
-path:hover {
-    fill: brown;
-    fill-opacity: .7;
-}
+/*path:hover {*/
+    /*fill: brown;*/
+    /*fill-opacity: .7;*/
+/*}*/
 
 .area {
     fill: #555;
     pointer-events: none;
+}
+
+.hidden{
+    display: none;
+}
+
+.highlight {
+    opacity: .75 !important;
+    stroke-width: 6px !important;;
+}
+
+.vor-cell{
+    fill: none;
+    stroke: gray;
+    opacity: 0.1;
+    cursor: crosshair;
 }

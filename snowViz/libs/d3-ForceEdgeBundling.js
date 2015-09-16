@@ -308,9 +308,9 @@
                 I = I_rate * I;
 
                 update_edge_divisions(P);
-                console.log('C' + cycle);
-                console.log('P' + P);
-                console.log('S' + S);
+                //console.log('C' + cycle);
+                //console.log('P' + P);
+                //console.log('S' + S);
             }
             return subdivision_points_for_edge;
         }

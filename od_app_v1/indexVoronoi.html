@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="libs/d3/d3.min.js" charset="utf-8"></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="libs/queue/queue.min.js"></script>
+    <script src="libs/leaflet-0.7.3/leaflet-src.js"></script>
+
+    <!--SOURCE for bundling algorithm https://github.com/upphiminn/d3.ForceBundle-->
+
+    <script type="text/javascript" src="libs/d3-ForceEdgeBundling.js"></script>
+
+    <!--Viz Scripts-->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main_styles.css">
+
+    <title>zone2zone</title>
+</head>
+<body>
+
+<div class="col-md-12" id="mainTitle">
+    <p>Zone 2 Zone Flows</p>
+    <ul>
+        <li> Testing out bundling algorithim (<a href="https://github.com/upphiminn/d3.ForceBundle">D3-ForceBundle</a>) for flow data.</li>
+        <li> D3 lines and points created from CSV on top of leaflet/mapbox base map</li>
+    </ul>
+</div>
+<div class="col-md-12" id="sourceMap"></div>
+
+<script>
+
+    var coords = [];
+    var theArcs = [];
+    var centerCsv;
+    var eedges = [];
+    var nnodes = {};
+    var nodeMap = d3.map();
+    var maxVal;
+    var results;
+    var initialLoad = true;
+    var projectedResults;
+    var svg;
+    var test;
+    //Variables
+    var myGlobals = {
+        flows: undefined,
+        links: [],
+        zonebyId: d3.map(),
+        g:undefined,
+        gV:undefined,
+        maxFlow:undefined};
+
+    /*
+    Source http://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs
+     */
+    function rad2degr(rad) { return rad * 180 / Math.PI; }
+    function degr2rad(degr) { return degr * Math.PI / 180; }
+
+
+    function getLatLngCenter(latLngInDegr) {
+        var LATIDX = 0;
+        var LNGIDX = 1;
+        var sumX = 0;
+        var sumY = 0;
+        var sumZ = 0;
+
+        for (var i=0; i<latLngInDegr.length; i++) {
+            var lat = degr2rad(latLngInDegr[i][LATIDX]);
+            var lng = degr2rad(latLngInDegr[i][LNGIDX]);
+            // sum of cartesian coordinates
+            sumX += Math.cos(lat) * Math.cos(lng);
+            sumY += Math.cos(lat) * Math.sin(lng);
+            sumZ += Math.sin(lat);
+        }
+
+        var avgX = sumX / latLngInDegr.length;
+        var avgY = sumY / latLngInDegr.length;
+        var avgZ = sumZ / latLngInDegr.length;
+
+        // convert average x, y, z coordinate to latitude and longtitude
+        var lng = Math.atan2(avgY, avgX);
+        var hyp = Math.sqrt(avgX * avgX + avgY * avgY);
+        var lat = Math.atan2(avgZ, hyp);
+
+        return ([rad2degr(lat), rad2degr(lng)]);
+    }
+
+
+
+    //Load the Data
+    queue()
+            .defer(d3.csv, 'data/auto6.csv')
+            .defer(d3.csv, 'data/taz.csv')
+            .await(initViz);
+
+
+    // Use Leaflet to implement a D3 geometric transformation.
+    function projectPoint(x, y) {
+        var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+        this.stream.point(point.x, point.y);
+    }
+
+    function projectPoint2(x, y) {
+        p = new L.latLng(y,x)
+        var point = map.latLngToLayerPoint(p);
+        return point
+    }
+
+    //Scales for the bulgy lines
+    var widthScale = d3.scale.linear().rangeRound([0, 25]);
+    var transform = d3.geo.transform({point: projectPoint});
+    var path = d3.geo.path().projection(transform);
+    var area = d3.svg.area()
+            .x(function(d) { return d.x; })
+            .x0(function(d) { return d.x0; })
+            .y0(function(d) { return d.y0; })
+            .y1(function(d) { return d.y1; })
+            .interpolate("cardinal")
+            .tension(0.5);
+
+    //TODO Set it up so it will take roughly formatted csvs, like once with spaces etc.
+    //TODO Set up to take json or csv.
+    //TODO set it up so you have a drop down populated with different value fields and can use choose different fields
+    //TODO ability to adjust display settings of data and trim the data
+    //TODO add add a chart that shows pattern of data, like a histogram, like thesis spider chart
+    function initViz(error, flowsCsv, center) {
+        myGlobals.flows = flowsCsv;
+        centerCsv = center;
+
+        //IF CSV
+        centerCsv.forEach(function (d) {
+            d.LatLng = new L.LatLng(+d.lat, +d.lng);
+            coords.push([d.LatLng.lat, d.LatLng.lng])
+            myGlobals.zonebyId.set(d.id, [d.LatLng.lng, d.LatLng.lat]);
+
+            //For Bundles
+            nodeMap.set(d.id, [d.lng, d.lat]);
+            nnodes[d.id] = {"x": d.lng, "y": d.lat}
+
+        });
+
+        var mapCenter = getLatLngCenter(coords);
+        //Leaflet Stuff
+        map = L.map("sourceMap");
+        //Set the zoom based on the coordinates
+        map.setView(mapCenter,map.fitBounds(coords)._zoom+1);
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            minZoom: 2,
+            id: 'mdowd.n6anai1b',
+            access_token: "pk.eyJ1IjoibWRvd2QiLCJhIjoic0xVV3F6cyJ9.-gW3HHcgm-6qeMajHWz5_A"
+        }).addTo(map);
+        L.control.scale().addTo(map);
+
+        map._initPathRoot();
+        svg = d3.select("#sourceMap").select("svg");
+//        svg = d3.select(map.getPanes().overlayPane).append("svg").attr("class", "leaflet-zoom-hide").attr("id","theSpiderSVG")
+        myGlobals.gV = svg.append('g');
+        myGlobals.g = svg.append('g');
+
+        myGlobals.flows.forEach(function (d) {
+            var val = Math.abs(d.Diff);
+//            val = 51
+            if (val > 50){
+                myGlobals.links.push({
+                    "type": "LineString",
+                    "val" : d.Diff,
+                    "coordinates": [myGlobals.zonebyId.get(Math.floor(d.O))
+                        , myGlobals.zonebyId.get(Math.floor(d.D))],
+                    O: d.O,
+                    D: d.D
+                });
+                maxVal = maxVal > val ? maxVal : val;
+                eedges.push({source: d.O, target: d.D, val: d.Diff })
+            }
+
+            myGlobals.maxFlow = myGlobals.maxFlow !== undefined && myGlobals.maxFlow > val ? myGlobals.maxFlow : val;
+        });
+
+        createViz(centerCsv);
+
+    }
+
+    //Helper function slices to 9
+    function s9(val){
+        return String(val).slice(0,9).replace('.',"")
+    }
+
+    function createViz(data) {
+        widthScale.domain([0, myGlobals.maxFlow]);
+
+        var feature = myGlobals.g
+                .selectAll("circle")
+                .data(data)
+                .enter().append("circle")
+                .style({
+                    "stroke": "black",
+                    "fill": "gray",
+                    "opacity" : 0.1})
+                .attr("r", 10)
+                .attr("class", function(d){
+                    return "N_" + s9(d.lat) + "_" + s9(d.lng.trim())
+                })
+                .attr("id", function(d)  {return "n" + d.id})
+
+        var vorData =[]
+        console.log(data)
+        data.forEach(function(d){
+            var point = map.latLngToLayerPoint(d.LatLng);
+            vorData.push({x:point.x, y:point.y, n:"N_" + s9(d.lat) + "_" + s9(d.lng.trim())})
+        });
+
+
+        var voronoi = d3.geom.voronoi()
+                .x(function(d){return d.x})
+                .y(function(d){return d.y});
+
+        voronoi(vorData)
+                .forEach(function(d) { d.point.cell = d; });
+
+//        var vorFeatures = myGlobals.gV.append("g")
+//                .attr("class", "vors")
+//                .selectAll("g")
+//                .data(vorData)
+//                .enter().append("g")
+//                .attr("class", "vor");
+
+        var vorFeatures = myGlobals.gV.selectAll("path")
+                .data(vorData)
+                .enter()
+                .append("path")
+                .attr("class", function(d) {return d.n + " vor-cell"})
+                .attr("d", function(d) { return d.cell.length ? "M" + d.cell.join("L") + "Z" : null; });
+
+
+        vorFeatures.on("mouseover", function(){
+            d3.selectAll(".bz:not(." + nodeOID +")").classed('hidden', false);
+            d3.selectAll("."+ nodeOID).classed('highlight', false);
+
+            test = this;
+            console.log(this)
+            var nodeOID = "O"+this.classList[0].slice(1,100);
+            var nodeDID = "D"+this.classList[0].slice(1,100);
+            console.log(nodeOID)
+            d3.selectAll(".bz:not(." + nodeOID +")").classed('hidden', true);
+            d3.selectAll("."+ nodeOID).classed('highlight', true);
+            console.log("CLICKED", this)
+        });
+
+
+        jQuery('#sourceMap').mouseleave(function(){
+            d3.selectAll(".bz").classed('hidden', false)
+            d3.selectAll(".bz").classed('highlight', false)
+        });
+
+
+        map.on("viewreset", reset);
+        reset();
+
+        // Reposition the SVG to cover the features.
+        function reset() {
+            //Transform the points
+            feature.attr("transform",
+                    function (d) {
+                        return "translate(" +
+                                map.latLngToLayerPoint(d.LatLng).x + "," +
+                                map.latLngToLayerPoint(d.LatLng).y + ")";
+                    });
+
+            setUpBundles()
+        }
+    }
+
+
+    function setUpBundles(){
+        d3.selectAll(".bz").remove();
+
+        var testDomain =   [50,250,500,1000,3000,5000,7715];
+        var colorDomain = ["black","purple","darkblue","blue","red", "orange", "yellow"];
+        var widthScale = d3.scale.linear().rangeRound([1, 15]);
+        widthScale.domain([0, maxVal]);
+        var color = d3.scale.linear()
+                .domain(testDomain)
+                .range(colorDomain);
+
+        var out = {};
+        for(var i = 1; i < centerCsv.length+1; i++){
+            var toPoint = map.latLngToLayerPoint([nnodes[i].y, nnodes[i].x]);
+              out[i] = {x: toPoint.x,y:toPoint.y, original: [nnodes[i].y, nnodes[i].x]}
+        }
+
+        if (initialLoad){
+            //Only run the bundling algorithm on the initial load, it is computationally intensive (~5sec)
+            //unprojectedResults will store the master lat long version of the bundle, while
+            //projectedResults will be used draw the svg on the map
+            var fbundling = d3.ForceEdgeBundling().nodes(out).edges(eedges);
+            results   = fbundling();
+            unprojectedResults = unprojectBundle(map, results);
+            initialLoad = false;
+        }
+
+
+
+        projectedResults = projectBundle(map, unprojectedResults);
+
+        var d3line = d3.svg.line()
+                .x(function(d){return d.x;})
+                .y(function(d){return d.y;})
+                .interpolate("linear");
+
+        //plot the data
+        for(var i = 0; i < results.length; i++){
+            myGlobals.g
+                    .append("path").attr("d", d3line(projectedResults[i]))
+                    .attr("class", function (d){
+                        return "bz " + "O_" + s9(unprojectedResults[i][0].x) + "_" + s9(unprojectedResults[i][0].y)
+                                + " D_" + s9(unprojectedResults[i][unprojectedResults[i].length-1].x)
+                                + "_" + s9(unprojectedResults[i][unprojectedResults[i].length-1].y)
+                    })
+                    .style("stroke-width", widthScale(Math.abs(eedges[i].val)))
+//                    .style("stroke-width", 2)
+                    .style("stroke", color(Math.abs(eedges[i].val)))
+//                    .style("stroke", "blue")
+                    .style("fill", "none")
+                    .style('stroke-opacity',function(d){
+                        if (Math.abs(eedges[i].val) > 2000){
+                            return 0.6
+                        } else{
+                            return 0.15
+                        }
+                    });
+        }
+
+
+
+
+        //This function takes the bundled results and creates a master Lat / Long list of points for paths
+        //This master lat long list can then be updated using the projectBundle function to match the current
+        //zoom level of the "map".
+        function unprojectBundle(theMap, bundledResults) {
+            var count=0;
+            //Need to write the code to create this bundle
+            projectedBundle = [];
+
+            bundledResults.forEach(function (d,i) {
+                projectedBundle.push([]);
+                d.forEach(function(d2,i2) {
+                    var lat = d2.x;
+                    var lng = d2.y;
+                    var points = theMap.layerPointToLatLng([lat,lng])
+                    count +=1
+                    projectedBundle[i].push({x:points.lat, y:points.lng});
+                })
+            });
+            return projectedBundle;
+        }
+
+        //ProjectBundle converts the master lat long list (unprojectedResults)
+        //into projected results, it will be called every time the map is reset
+        function projectBundle(theMap, bundledResults) {
+            projectedBundle = [];
+            bundledResults.forEach(function (d,i) {
+                projectedBundle.push([]);
+                d.forEach(function(d2,i2) {
+                    var x = d2.x;
+                    var y = d2.y;
+                    var points = theMap.latLngToLayerPoint([x,y])
+                    projectedBundle[i].push({x:points.x, y:points.y});
+                })
+            });
+            return projectedBundle;
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

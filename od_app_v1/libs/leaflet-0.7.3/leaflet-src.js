@@ -1966,7 +1966,7 @@ L.Map = L.Class.extend({
 	},
 
 	latLngToLayerPoint: function (latlng) { // (LatLng)
-		var projectedPoint = this.project(L.latLng(latlng))._round();
+		var projectedPoint = this.project(L.latLng(latlng));
 		return projectedPoint._subtract(this.getPixelOrigin());
 	},
 
@@ -2275,7 +2275,7 @@ L.Map = L.Class.extend({
 	_getNewTopLeftPoint: function (center, zoom) {
 		var viewHalf = this.getSize()._divideBy(2);
 		// TODO round on display, not calculation to increase precision?
-		return this.project(center, zoom)._subtract(viewHalf)._round();
+		return this.project(center, zoom)._subtract(viewHalf);
 	},
 
 	_latLngToNewLayerPoint: function (latlng, newZoom, newCenter) {
