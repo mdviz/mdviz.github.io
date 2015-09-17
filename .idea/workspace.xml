@@ -2,149 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6949c6a-2567-4eb3-9514-b78c1c26dc6c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/css/main_styles.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/Coordinates.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/auto6.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/centroid.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/centroid.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/refugee-nodes.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/schema.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/taper.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/taz.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/taz.txt.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/test.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/indexVoronoi.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/js/nodeSelector.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/activity-indicator-1.0.0/README" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/activity-indicator-1.0.0/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/activity-indicator-1.0.0/jquery.activity-indicator-1.0.0.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/activity-indicator-1.0.0/jquery.activity-indicator-1.0.0.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/d3-ForceEdgeBundling.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/d3/d3.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/jquery.tipsy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/jquery/jquery-2.1.1.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/jquery/jquery-ui.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/images/layers-2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/images/layers.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/images/marker-icon-2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/images/marker-icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/images/marker-shadow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/leaflet-src.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/leaflet.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/leaflet.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/queue/queue.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/bower" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/package" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/topojson" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/topojson-geojson" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/topojson-group" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/topojson-merge" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/topojson-svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/examples/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/examples/us-10m.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/examples/world-110m.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/examples/world-50m.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/bounds.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/cartesian.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/clockwise.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/compute-id.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/coordinate-systems.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/delta.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/filter.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/geomify.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/merge-properties.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/post-quantize.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/pre-quantize.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/prune.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/quantize.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/scale.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/simplify.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/spherical.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/stitch.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/cut.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/dedup.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/extract.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/hashmap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/hashset.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/join.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/point-equal.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/point-hash.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/transform-properties.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/type.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/assert.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/bounds-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/cartesian-ringArea-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/clockwise-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/compute-id-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/delta-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/feature-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/filter-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson-command-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/empty-multilinestring.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/empty-multipoint.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/empty-multipolygon.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/empty-multipolygon2.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/empty-polygon.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/no-properties.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/polygon-clockwise.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/polygon-counterclockwise.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/polygon-feature-mercator.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/polygon-feature-rounded.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/polygon-feature.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/properties.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geomify-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/merge-properties-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/merge-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/mesh-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/neighbors-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/prequantize-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/prune-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/scale-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/simplify-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/spherical-ringArea-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson-command-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/empty-allowed.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/empty.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/polygon-counterclockwise.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/polygon-mercator.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/polygon-no-quantization.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/polygon.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/properties-external-default-id.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/properties-id-computed.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/properties-id-fallback.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/properties-number.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/properties.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/cut-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/dedup-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/extract-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/hashmap-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/hashset-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/index-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/join-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/transform-properties-test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/tsv/properties-external.tsv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/topojson.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mdviz.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -172,8 +30,10 @@
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.6534351" vertical-offset="644" max-vertical-offset="3024">
-              <caret line="67" column="73" selection-start-line="67" selection-start-column="73" selection-end-line="67" selection-end-column="73" />
-              <folding />
+              <caret line="67" column="124" selection-start-line="67" selection-start-column="124" selection-end-line="67" selection-end-column="124" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#li#5;n#ul#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -224,7 +84,7 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-517" />
+    <option name="x" value="184" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="812" />
@@ -384,7 +244,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-517" y="23" width="1440" height="812" extended-state="0" />
+    <frame x="184" y="23" width="1440" height="812" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -577,8 +437,10 @@
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6534351" vertical-offset="644" max-vertical-offset="3024">
-          <caret line="67" column="73" selection-start-line="67" selection-start-column="73" selection-end-line="67" selection-end-column="73" />
-          <folding />
+          <caret line="67" column="124" selection-start-line="67" selection-start-column="124" selection-end-line="67" selection-end-column="124" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#li#5;n#ul#0;n#div#1;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
