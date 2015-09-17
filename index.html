@@ -35,7 +35,7 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
+        <div class="container" id="theTop">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
@@ -56,7 +56,7 @@
                         <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="Project/index.html">MIT Thesis Work</a>
+                        <a class="page-scroll" href="#project">MIT Thesis Work</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#current">Current Projects</a>
@@ -65,7 +65,7 @@
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a class="page-scroll" style = "padding-bottom:11px" href="https://github.com/mdviz?tab=repositories"><img src="pics/github_smaller.png"></a>
+                        <a class="page-scroll" style = "padding-bottom:14px" href="https://github.com/mdviz?tab=repositories"><img src="pics/gsw.png"></a>
                     </li>
 
                 </ul>
@@ -93,16 +93,46 @@
     </header>
 
     <!-- About Section -->
-    <!--<section id="about" class="container content-section text-center">-->
-        <!--<div class="row">-->
-            <!--<div class="col-lg-8 col-lg-offset-2">-->
-                <!--<h2>About</h2>-->
+    <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>About</h2>
 
-            <!--<p>bhlahblahb bahlalhblah bhlablhbaha bhlablabl</p>-->
+            <p>I am a transportation planner, modeler, coder, GIS expert and civic data enthusiast.
+            I am from Seattle, WA and currently live in NYC. While attending MIT, I worked
+                on modeling the potential impacts of climate change and inundation
+                on the Boston Metro region. I love writing code, studying transportation, and all things
+                geospatial.
+            </p>
 
-            <!--</div>-->
-        <!--</div>-->
-    <!--</section>-->
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Section -->
+    <section id="project" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>MIT Thesis</h2>
+                <h4> Modeling Inundation Impacts on Transportation Network Performance: A GIS and Four-Step Transportation Modeling Analysis</h4>
+
+                <p><img src="pics/volumes.png"</p>
+
+                <p style="font-size: 14px; text-align: justify"> <span style="font-size: 16px; font-weight: bold">Abstract</span> <br>
+
+                    The world’s leading climate scientists have reached a consensus that “[w]arming of the climate system is unequivocal” (IPCC, 2007). This warming will carry with it a host of consequences for the global community, including increased occurrence of flooding. Little focus has been placed on the operation of transport systems during, or shortly after inundation events.
+                    Inundation affects the availability and quality of network assets (i.e. Transportation Supply) and inhabitable land, which produces and attracts transportation users (i.e. Demand). In this thesis, I apply an altered four-step transportation modeling method to allow for the analysis of impacts in a single set time: modeling an event rather than a future equilibrium scenario.
+                    I show how traditional four-step models can be used to produce valuable metrics describing performance of the disrupted transportation system. Such metrics contribute to understanding potential consequences and planning for mitigation and response.
+                    Using the Boston Metro Region as a case study, and a four-step model for the year 2010, I demonstrate a method (Inundation Impact Assessment) for quantifying transport network impacts under six different inundation levels, one-foot to six-feet. The results indicate that inundation has widespread impacts on the ability of persons to complete trips and the performance of both the auto and transit networks.
+                    I then demonstrate how this method can be applied to examine different infrastructure projects in the future, modeling two different demographic scenarios for the year 2030 with two different BRT alignments. The goal is to evaluate potential contribution of BRT to recoup trips lost by the impact of inundation on other transit links.
+                    The methods and approaches used in this work show how such four-step models can be used to plan for inundation events. This method provides significant amounts of data that can be used to assess the value of potential interventions, such as the protection of mobility or the reinforcement of transportation network performance.</p>
+
+
+            </div>
+        </div>
+    </section>
+
 
     <!-- About Section -->
     <section id="current" class="container content-section text-center">
@@ -110,45 +140,37 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Current Projects</h2>
 
+
                 <p><a href="od_app_v2/index.html">Flow Viz</a></p>
+                <p style="font-size: 14px; text-align: justify">Visualizing flows can be difficult. It requires knowing a lot of GIS, data processing skills and time. Furthermore, standard
+                    "desire lines" or "spider lines" with linear lines with anything more than 50 OD pairs can end up being difficult to interpret. I'm working on a
+                    web-based tool that will allow someone to upload a csv of coordinates and a csv of flows to implement a bundled flow visualization automatically.
+                    Many thanks to <a href="https://github.com/upphiminn/d3.ForceBundle">upphiminn</a> for the amazing bundling algorithm.
+                </p>
                 <p><a href="od_app_v2/index.html"><img src="pics/flow_small.png"></a></p>
 
                 <p><a  href="snowViz/index.html">Snow Viz</a></p>
+                <p style="font-size: 14px; text-align: justify">I created a simple animated leaflet map of the NOAA <a href="https://www.ncdc.noaa.gov/snow-and-ice/daily-snow/">
+                    Daily Snow Fall Data
+                </a>
+                    . The data was pulled and processed with Python, then visualized with leaflet and leaflet heatmap.
+                </p>
                 <p><a  href="snowViz/index.html"><img src="pics/snow_small.png"></a></p>
 
             </div>
         </div>
     </section>
-    <!--&lt;!&ndash; Download Section &ndash;&gt;-->
-    <!--<section id="download" class="content-section text-center">-->
-        <!--<div class="download-section">-->
-            <!--<div class="container">-->
-                <!--<div class="col-lg-8 col-lg-offset-2">-->
-                    <!--<h2>Download Grayscale</h2>-->
-                    <!--<p>You can download Grayscale for free on the preview page at Start Bootstrap.</p>-->
-                    <!--<a href="http://startbootstrap.com/template-overviews/grayscale/" class="btn btn-default btn-lg">Visit Download Page</a>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</section>-->
+
 
     <!-- Contact Section -->
     <section id="contact" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Contact Michael</h2>
-                <p>Feel free to email.</p>
                 <p><a href="mailto:mikdowd@gmail.com">mikdowd@gmail.com</a>
                 </p>
                 <p>646-280-5009</p>
-                <ul class="list-inline banner-social-buttons">
-                    <!--<li>-->
-                        <!--<a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>-->
-                    <!--</li>-->
-                </ul>
+
             </div>
         </div>
     </section>

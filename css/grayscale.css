@@ -100,7 +100,7 @@ a:focus {
 
 .navbar-custom .nav li a:hover {
     outline: 0;
-    color: midnightblue;
+    color: #47e7b5;
     background-color: transparent;
 }
 
@@ -147,7 +147,7 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #111111;
-    background: url(../img/viz_pic.png) no-repeat bottom center scroll;
+    background: url(../img/viz_pic_gray.png) no-repeat bottom center scroll;
     background-color: slategray;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -162,10 +162,12 @@ a:focus {
 
 .intro .intro-body .brand-heading {
     font-size: 40px;
+    color: #f5f5f5;
 }
 
 .intro .intro-body .intro-text {
     font-size: 18px;
+    color: #f5f5f5;
 }
 
 @media(min-width:768px) {
@@ -180,7 +182,6 @@ a:focus {
 
     .intro .intro-body .intro-text {
         font-size: 26px;
-    }
 }
 
 .btn-circle {
@@ -371,3 +372,8 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
+
+/*#theTop{*/
+    /*background-color: #f5f5f5;*/
+    /*opacity: 20%;*/
+/*}*/
