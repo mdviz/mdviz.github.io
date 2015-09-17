@@ -2,9 +2,148 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6949c6a-2567-4eb3-9514-b78c1c26dc6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/od_app_v1/libs/d3-ForceEdgeBundling.js" afterPath="$PROJECT_DIR$/od_app_v1/libs/d3-ForceEdgeBundling.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/snowViz/libs/d3-ForceEdgeBundling.js" afterPath="$PROJECT_DIR$/snowViz/libs/d3-ForceEdgeBundling.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/od_app_v1/index.html" afterPath="$PROJECT_DIR$/od_app_v1/index.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/css/main_styles.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/Coordinates.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/auto6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/centroid.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/centroid.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/refugee-nodes.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/schema.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/taper.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/taz.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/taz.txt.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/data/test.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/indexVoronoi.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/js/nodeSelector.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/activity-indicator-1.0.0/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/activity-indicator-1.0.0/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/activity-indicator-1.0.0/jquery.activity-indicator-1.0.0.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/activity-indicator-1.0.0/jquery.activity-indicator-1.0.0.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/fonts/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/fonts/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/bootstrap/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/d3-ForceEdgeBundling.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/d3/d3.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/jquery.tipsy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/jquery/jquery-2.1.1.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/jquery/jquery-ui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/images/layers-2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/images/layers.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/images/marker-icon-2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/images/marker-icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/images/marker-shadow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/leaflet-src.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/leaflet.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/leaflet-0.7.3/leaflet.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/queue/queue.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/.npmignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/bower" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/package" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/topojson" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/topojson-geojson" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/topojson-group" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/topojson-merge" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bin/topojson-svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/examples/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/examples/us-10m.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/examples/world-110m.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/examples/world-50m.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/bounds.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/cartesian.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/clockwise.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/compute-id.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/coordinate-systems.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/delta.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/filter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/geomify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/merge-properties.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/post-quantize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/pre-quantize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/prune.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/quantize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/scale.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/simplify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/spherical.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/stitch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/cut.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/dedup.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/extract.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/hashmap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/hashset.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/join.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/point-equal.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/topology/point-hash.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/transform-properties.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/lib/topojson/type.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/assert.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/bounds-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/cartesian-ringArea-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/clockwise-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/compute-id-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/delta-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/feature-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/filter-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson-command-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/empty-multilinestring.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/empty-multipoint.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/empty-multipolygon.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/empty-multipolygon2.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/empty-polygon.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/no-properties.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/polygon-clockwise.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/polygon-counterclockwise.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/polygon-feature-mercator.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/polygon-feature-rounded.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/polygon-feature.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geojson/properties.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/geomify-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/merge-properties-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/merge-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/mesh-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/neighbors-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/prequantize-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/prune-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/scale-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/simplify-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/spherical-ringArea-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson-command-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/empty-allowed.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/empty.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/polygon-counterclockwise.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/polygon-mercator.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/polygon-no-quantization.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/polygon.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/properties-external-default-id.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/properties-id-computed.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/properties-id-fallback.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/properties-number.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topojson/properties.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/cut-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/dedup-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/extract-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/hashmap-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/hashset-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/index-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/topology/join-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/transform-properties-test.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/test/tsv/properties-external.tsv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/od_app_v1/libs/topojson-master/topojson.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mdviz.github.io.iws" />
@@ -30,35 +169,31 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/od_app_v1/index.html">
+        <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40916032" vertical-offset="3940" max-vertical-offset="4640">
-              <caret line="263" column="0" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6534351" vertical-offset="644" max-vertical-offset="3024">
+              <caret line="67" column="73" selection-start-line="67" selection-start-column="73" selection-end-line="67" selection-end-column="73" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="d3-ForceEdgeBundling.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/od_app_v1/libs/d3-ForceEdgeBundling.js">
+      <file leaf-file-name="nodeSelector.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/od_app_v2/js/nodeSelector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4624" max-vertical-offset="6928">
-              <caret line="310" column="0" selection-start-line="310" selection-start-column="0" selection-end-line="312" selection-end-column="39" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="156" max-vertical-offset="2176">
+              <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="d3-ForceEdgeBundling.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/snowViz/libs/d3-ForceEdgeBundling.js">
+      <file leaf-file-name="main_styles.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/od_app_v2/css/main_styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4480" max-vertical-offset="6928">
-              <caret line="314" column="47" selection-start-line="314" selection-start-column="47" selection-end-line="314" selection-end-column="47" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="528" max-vertical-offset="1248">
+              <caret line="54" column="15" selection-start-line="54" selection-start-column="15" selection-end-line="54" selection-end-column="15" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -74,11 +209,14 @@
         <option value="$PROJECT_DIR$/css/main_style.css" />
         <option value="$PROJECT_DIR$/css/grayscale.css" />
         <option value="$PROJECT_DIR$/js/grayscale.js" />
-        <option value="$PROJECT_DIR$/od_app_v1/css/main_styles.css" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/snowViz/libs/d3-ForceEdgeBundling.js" />
         <option value="$PROJECT_DIR$/od_app_v1/libs/d3-ForceEdgeBundling.js" />
+        <option value="$PROJECT_DIR$/od_app_v1/css/main_styles.css" />
         <option value="$PROJECT_DIR$/od_app_v1/index.html" />
+        <option value="$PROJECT_DIR$/od_app_v2/css/main_styles.css" />
+        <option value="$PROJECT_DIR$/od_app_v2/index.html" />
+        <option value="$PROJECT_DIR$/od_app_v2/js/nodeSelector.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -86,7 +224,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="32" />
+    <option name="x" value="-517" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="812" />
   </component>
@@ -141,7 +280,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="od_app_v1" />
+              <option name="myItemId" value="od_app_v2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -158,10 +297,6 @@
               <option name="myItemId" value="od_app_v1" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -170,10 +305,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="mdviz.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="od_app_v1" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -187,11 +318,16 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../od_app_v2" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Dropbox (MIT)/cs171-project-dowd-michael/Thesis_Misc" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="FullScreen" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
@@ -224,6 +360,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
       <method />
     </configuration>
     <list size="0" />
@@ -242,8 +384,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="32" width="1440" height="812" extended-state="0" />
-    <editor active="false" />
+    <frame x="-517" y="23" width="1440" height="812" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -251,18 +393,18 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2501762" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -286,85 +428,34 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/od_app_v2/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1638" max-vertical-offset="2656">
-          <caret line="118" column="71" selection-start-line="118" selection-start-column="71" selection-end-line="118" selection-end-column="71" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="336" max-vertical-offset="5776">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/grayscale.css">
+    <entry file="file://$PROJECT_DIR$/od_app_v2/js/nodeSelector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6064">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2176">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/od_app_v2/css/main_styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2704">
+        <state vertical-scroll-proportion="0.0" vertical-offset="528" max-vertical-offset="1248">
+          <caret line="54" column="15" selection-start-line="54" selection-start-column="15" selection-end-line="54" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/od_app_v0/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4640">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snowViz/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35928145" vertical-offset="0" max-vertical-offset="3184">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/grayscale.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33233082" vertical-offset="1379" max-vertical-offset="6064">
-          <caret line="100" column="32" selection-start-line="100" selection-start-column="32" selection-end-line="100" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/main_style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1618497" vertical-offset="0" max-vertical-offset="692">
-          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2324493" vertical-offset="1131" max-vertical-offset="2768">
-          <caret line="80" column="33" selection-start-line="80" selection-start-column="33" selection-end-line="80" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/od_app_v1/css/main_styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.115606934" vertical-offset="0" max-vertical-offset="720">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/grayscale.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5549133" vertical-offset="0" max-vertical-offset="2944">
-          <caret line="24" column="3" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snowViz/css/main_style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="692">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -372,26 +463,121 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4480" max-vertical-offset="6928">
           <caret line="314" column="47" selection-start-line="314" selection-start-column="47" selection-end-line="314" selection-end-column="47" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/od_app_v1/libs/d3-ForceEdgeBundling.js">
+    <entry file="file://$PROJECT_DIR$/snowViz/libs/d3-ForceEdgeBundling.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4624" max-vertical-offset="6928">
-          <caret line="310" column="0" selection-start-line="310" selection-start-column="0" selection-end-line="312" selection-end-column="39" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="4480" max-vertical-offset="6928">
+          <caret line="314" column="47" selection-start-line="314" selection-start-column="47" selection-end-line="314" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/od_app_v1/index.html">
+    <entry file="file://$PROJECT_DIR$/snowViz/libs/d3-ForceEdgeBundling.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40916032" vertical-offset="3940" max-vertical-offset="4640">
-          <caret line="263" column="0" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4480" max-vertical-offset="6928">
+          <caret line="314" column="47" selection-start-line="314" selection-start-column="47" selection-end-line="314" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1638" max-vertical-offset="2656">
+          <caret line="118" column="71" selection-start-line="118" selection-start-column="71" selection-end-line="118" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/grayscale.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6064">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2704">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/grayscale.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33233082" vertical-offset="1379" max-vertical-offset="6064">
+          <caret line="100" column="32" selection-start-line="100" selection-start-column="32" selection-end-line="100" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main_style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1618497" vertical-offset="0" max-vertical-offset="692">
+          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/grayscale.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5549133" vertical-offset="0" max-vertical-offset="2944">
+          <caret line="24" column="3" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snowViz/css/main_style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="692">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snowViz/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41400304" vertical-offset="0" max-vertical-offset="3184">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snowViz/libs/d3-ForceEdgeBundling.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.79882526" vertical-offset="4480" max-vertical-offset="6928">
+          <caret line="314" column="47" selection-start-line="314" selection-start-column="47" selection-end-line="314" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/od_app_v0/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="496" max-vertical-offset="4640">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/od_app_v2/css/main_styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="528" max-vertical-offset="1248">
+          <caret line="54" column="15" selection-start-line="54" selection-start-column="15" selection-end-line="54" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/od_app_v2/js/nodeSelector.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="156" max-vertical-offset="2176">
+          <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/od_app_v2/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6666667" vertical-offset="336" max-vertical-offset="5776">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6534351" vertical-offset="644" max-vertical-offset="3024">
+          <caret line="67" column="73" selection-start-line="67" selection-start-column="73" selection-end-line="67" selection-end-column="73" />
           <folding />
         </state>
       </provider>

@@ -1,0 +1,43 @@
+body{
+    width: 1200px;
+    height: 1500px;
+}
+
+#sourceMap {
+    width: 69%;
+    height: 60%;
+}
+#spin {
+    margin-top: 250px;
+    margin-left: 500px;
+}
+#mainTitle {
+    width: 100%;
+    font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+ul{
+    font-weight: normal;
+    font-size: 15px;
+}
+
+svg {
+    position: relative;
+}
+
+path {
+    fill: #000;
+    fill-opacity: .2;
+}
+
+/*path:hover {*/
+    /*fill: brown;*/
+    /*fill-opacity: .7;*/
+/*}*/
+
+/*.area {*/
+    /*fill: #555;*/
+    /*pointer-events: none;*/
+/*}*/

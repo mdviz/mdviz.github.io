@@ -17,22 +17,33 @@
     <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
     <link rel="stylesheet" type="text/css" href="css/main_styles.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <title>zone2zone</title>
+
+
 </head>
 <body>
 
-<div class="col-md-12" id="mainTitle">
+
+
+<div class="col-md-6 column" id="mainTitle">
     <p>Zone 2 Zone Flows</p>
     <ul>
         <li> Testing out bundling algorithim (<a href="https://github.com/upphiminn/d3.ForceBundle">D3-ForceBundle</a>) for flow data.</li>
         <li> D3 lines and points created from CSV on top of leaflet/mapbox base map</li>
     </ul>
 </div>
-<div class="col-md-8" id="sourceMap"></div>
-<div class="col-md-4" id="selectNodes"></div>
+<div class="col-md-6 column" id="mainTitle">
+    <ul>
+        <!--<i class="fa fa-circle-o-notch fa-spin fa-3x"></i>-->
+    </ul>
+</div>
+<div class="col-md-8 column" id="sourceMap"></div>
+<div class="col-md-4 column" id="selectNodes"></div>
+
 
 <script>
+
 
     var coords = [];
     var theArcs = [];
@@ -45,7 +56,6 @@
     var initialLoad = true;
     var projectedResults;
     var svg;
-    var test;
     //Variables
     var myGlobals = {
         flows: undefined,
@@ -54,6 +64,7 @@
         g:undefined,
         gV:undefined,
         maxFlow:undefined};
+
 
 
 
@@ -292,6 +303,7 @@
                             return 0.15
                         }
                     });
+            loaded = true;
         }
 
 
@@ -335,6 +347,8 @@
         }
 
     }
+
+
 
 </script>
 

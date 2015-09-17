@@ -19,7 +19,6 @@ function createNodes(nodes){
 
 
     var margin= 50;
-    console.log("IM IN HERE!!!!!!!!");
     sGlobals.svg = d3.select("#selectNodes")
         .append('svg')
         .attr("width", sGlobals.width)
@@ -29,7 +28,7 @@ function createNodes(nodes){
     var rscale = d3.scale.linear().domain([0, d3.max(top10destination, function(d){
         return d.flowsO
     })]).range([3, 25]);
-    var yscale = d3.scale.linear().domain([0, 20]).range([60, sGlobals.height-50]);
+    var yscale = d3.scale.linear().domain([0, 20]).range([60, sGlobals.height-10]);
 
     sGlobals.svg.selectAll("circle")
         .data(top10destination)
@@ -43,7 +42,6 @@ function createNodes(nodes){
             return yscale(i)
         })
         .attr("r", function(d) {
-            console.log(d.flowsO)
             return rscale(d.flowsO)
         })
         .attr("width", 20)
@@ -52,7 +50,6 @@ function createNodes(nodes){
             return d.classId + " selectNodes";
         })
         .on('mouseover', function(){
-            console.log(this)
             nodetest = this;
             var nodeOID = "O_"+this.classList[0];
             var nodeDID = "D_"+this.classList[0];
