@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="libs/d3/d3.min.js" charset="utf-8"></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="libs/queue/queue.min.js"></script>
+
+    <script src="libs/leaflet-0.7.3/leaflet.js"></script>
+    <script src="libs/Leaflet.label-master/src/Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/BaseMarkerMethods.js"></script>
+    <script src="libs/Leaflet.label-master/src/Marker.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/CircleMarker.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/Path.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/Map.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/FeatureGroup.Label.js"></script>
+
+
+
+    <!--Viz Scripts-->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="libs/Leaflet.label-master/dist/leaflet.label.css" />
+
+    <title></title>
+
+
+</head>
+<body>
+
+
+
+
+
+<div class="col-md-12 column" id="sourceMap"></div>
+
+
+<script>
+
+
+    //Do map stuff
+    //Leaflet Stuff
+    map = L.map("sourceMap");
+    //Set the zoom based on the coordinates
+    map.setView([39.568998, -104.953283], 12);
+    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        minZoom: 2,
+        id: 'mdowd.n6anai1b',
+        access_token: "pk.eyJ1IjoibWRvd2QiLCJhIjoic0xVV3F6cyJ9.-gW3HHcgm-6qeMajHWz5_A"
+    }).addTo(map);
+    L.control.scale().addTo(map);
+
+
+    d3.csv("out.csv", function(data) {
+
+
+        data.forEach(function (i) {
+
+
+
+            if (+i.LAT < 39.68) {
+
+
+    //            var myIcon = L.icon({
+    //                iconUrl: 'my-icon.png',
+    //                iconSize: [0, 0],
+    //                iconAnchor: [5, 0],
+    //                labelAnchor: [-2, 0] // as I want the label to appear 2px past the icon (10 + 2 - 6)
+    //            });
+    //
+    //            labelMarker = new L.marker([i.LAT, i.LNG], {
+    //                icon: myIcon
+    //            }).bindLabel(i.Company, {
+    //                noHide: true,
+    //                direction: 'auto'
+    //            })
+    //                    .addTo(map)
+    //            ;
+
+                console.log(i)
+                marker = new L.circle([i.LAT, i.LNG], 200, {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5
+                }).bindLabel(i.Company, {
+                            noHide: true,
+                            direction: 'auto'
+                        })
+                        .addTo(map)
+            }
+
+        });
+
+        d3.selectAll('.leaflet-marker-icon').remove()
+
+    });
+
+
+
+
+</script>
+
+</body>
+</html>
