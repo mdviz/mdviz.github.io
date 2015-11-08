@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="libs/d3/d3.min.js" charset="utf-8"></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="libs/queue/queue.min.js"></script>
+    <script src="libs/leaflet-0.7.3/leaflet-src.js"></script>
+    <script src="js/nodeSelector.js"></script>
+
+    <!--SOURCE for bundling algorithm https://github.com/upphiminn/d3.ForceBundle-->
+
+    <script type="text/javascript" src="libs/d3-ForceEdgeBundling.js"></script>
+
+    <!--Viz Scripts-->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main_styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <title>zone2zone</title>
+
+
+</head>
+<body>
+
+
+
+
+<script>
+
+
+    var coords = [];
+    var theArcs = [];
+    var centerCsv;
+    var eedges = [];
+    var nnodes = {};
+    var nodeMap = d3.map();
+    var maxVal;
+    var results;
+    var initialLoad = true;
+    var projectedResults;
+    var svg;
+    //Variables
+    var myGlobals = {
+        flows: undefined,
+        zonebyId: d3.map(),
+        g:undefined,
+        gV:undefined,
+        maxFlow:undefined};
+
+
+    //Helper function slices to 9
+    function s9(val){
+        return String(val).slice(0,9).replace('.',"")
+    }
+
+
+
+
+
+    //Load the Data
+    queue()
+            .defer(d3.csv, 'data/waFlowsClean.csv')
+            .defer(d3.csv, 'data/SeattleAreaTAD.csv')
+            .await(initViz);
+
+
+
+    function initViz(error, flowsCsv, center, bundles) {
+        myGlobals.flows = flowsCsv;
+        centerCsv = center;
+        results = bundles;
+        console.log("line 147", results)
+
+        //IF CSV
+        centerCsv.forEach(function (d) {
+            d.LatLng = new L.LatLng(+d.lat, +d.lng);
+            coords.push([d.LatLng.lat, d.LatLng.lng]);
+            myGlobals.zonebyId.set(d.id, [d.LatLng.lng, d.LatLng.lat]);
+
+            //For Bundles
+            nodeMap.set(d.id, [d.lng, d.lat]);
+            nnodes[d.id] = {"x": d.lng, "y": d.lat, flowsO:0, flowsD:0, classId:  s9(d.lat).trim() + "_" + s9(d.lng.trim())}
+
+        });
+
+
+
+        myGlobals.flows.forEach(function (d) {
+            var val = Math.abs(d.VAL);
+//            val = 51
+            if ((val > 150) && (d.O !== d.D)){
+
+                maxVal = maxVal > val ? maxVal : val;
+                //And update nnodes
+                try {
+                    //Only map flows to nodes that are present in the node csv
+                    nnodes[d.O].flowsO += val;
+                    nnodes[d.D].flowsD += val;
+                    eedges.push({source: d.O, target: d.D, val: d.VAL })
+                } catch (err) {
+                    //do nothing
+                }
+
+            }
+
+            myGlobals.maxFlow = myGlobals.maxFlow !== undefined && myGlobals.maxFlow > val ? myGlobals.maxFlow : val;
+        });
+
+        setUpBundles()
+    }
+
+
+
+
+    function setUpBundles(){
+        function s8(num){
+            return +num.toFixed(8);
+        }
+
+        var out = {};
+        for (i in nnodes){
+            var toPoint = map.latLngToLayerPoint([nnodes[i].y, nnodes[i].x]);
+            out[i] = {x: s8(toPoint.x),y:s8(toPoint.y), original: [s9(nnodes[i].y), s9(nnodes[i].x)]}
+        }
+
+
+            //Only run the bundling algorithm on the initial load, it is computationally intensive (~5sec)
+            //unprojectedResults will store the master lat long version of the bundle, while
+            //projectedResults will be used draw the svg on the map
+            var fbundling = d3.ForceEdgeBundling().nodes(out).edges(eedges);
+            results   = fbundling();
+            console.log(results)
+            unprojectedResults = unprojectBundle(map, results);
+
+
+        projectedResults = projectBundle(map, unprojectedResults);
+
+
+        //This function takes the bundled results and creates a master Lat / Long list of points for paths
+        //This master lat long list can then be updated using the projectBundle function to match the current
+        //zoom level of the "map".
+        function unprojectBundle(theMap, bundledResults) {
+            var count=0;
+            projectedBundle = [];
+
+            bundledResults.forEach(function (d,i) {
+                projectedBundle.push([]);
+                d.forEach(function(d2,i2) {
+                    var lat = d2.x;
+                    var lng = d2.y;
+                    var points = theMap.layerPointToLatLng([lat,lng])
+                    count +=1;
+                    projectedBundle[i].push({x:points.lat, y:points.lng});
+                })
+            });
+            return projectedBundle;
+        }
+
+        //ProjectBundle converts the master lat long list (unprojectedResults)
+        //into projected results, it will be called every time the map is reset
+        function projectBundle(theMap, bundledResults) {
+            projectedBundle = [];
+            bundledResults.forEach(function (d,i) {
+                projectedBundle.push([]);
+                d.forEach(function(d2,i2) {
+                    var x = d2.x;
+                    var y = d2.y;
+                    var points = theMap.latLngToLayerPoint([x,y])
+                    projectedBundle[i].push({x:points.x, y:points.y});
+                })
+            });
+            return projectedBundle;
+        }
+
+    }
+
+
+
+</script>
+</body>
+</html>

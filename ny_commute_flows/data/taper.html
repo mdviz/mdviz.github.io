@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    body {
+        font: 15px sans-serif;
+        line-height: 18px;
+        width: 600px;
+        margin: 20px auto;
+    }
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+    .area {
+        fill: #555;
+        pointer-events: none;
+    }
+    circle {
+        fill: orange;
+        stroke: none;
+        opacity: 0.3;
+    }
+    circle:hover {
+        fill: orange;
+        stroke: orange;
+        stroke-width: 12;
+        opacity: 1;
+    }
+</style>
+<body>
+<div style="margin-left: 100px">
+    Tension <input id="tension" type="range" min=0 max=1 value=0.5 step=0.05 /> <span id="tension-val">0.5</span><br/>
+    Width <input id="width" type="range" min=1 max=60 value=24 step=1 /> <span id="width-val">24</span> px<br/>
+    Offset <input id="offset" type="range" min=-200 max=200 value=-50 step=1 /> <span id="offset-val">-50</span> px
+    <div>
+        <script src="http://d3js.org/d3.v3.js"></script>
+        <script>
+            var width = 600,
+                    height = 400;
+            var parseDate = d3.time.format("%d-%b-%y").parse;
+            var area = d3.svg.area()
+                    .x(function(d) { return d.x; })
+                    .x0(function(d) { return d.x0; })
+                    .y0(function(d) { return d.y0; })
+                    .y1(function(d) { return d.y1; })
+                    .interpolate("cardinal")
+                    .tension(0.5);
+            var links = [
+                {
+                    start: [100,200],
+                    end: [500,200],
+                    width: 24,
+                    offset: -50},
+                {
+                    start: [200,300],
+                    end: [600,400],
+                    width: 24,
+                    offset: 50}
+            ];
+
+            function toArc(d) {
+                console.log("d", d)
+                return [{
+                    x: d.start[0],
+                    x0: d.start[0],
+                    y0: d.start[1],
+                    y1: d.start[1],
+                },
+                    {
+                        x: (d.start[0]+d.end[0])/2,
+                        x0: (d.start[0]+d.end[0])/2,
+                        y0: (d.start[1]+d.end[1])/2+d.offset+d.width/2,
+                        y1: (d.start[1]+d.end[1])/2+d.offset-d.width/2,
+                    }
+                    ,
+                    {
+                        x: d.end[0],
+                        x0: d.end[0],
+                        y0: d.end[1],
+                        y1: d.end[1],
+                    }];
+            }
+
+            var arcs = links.map(function(d){
+                return toArc(d)
+            });
+
+            console.log("arcs", arcs);
+            var svg = d3.select("body").append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+
+            function createArea(link){
+                var path = svg.selectAll("path")
+                        .data(link)
+                        .enter()
+                        .append("path")
+                        .attr("class", "area")
+                        .attr("d", area);
+
+//                svg.append("circle")
+//                        .attr("cx", link.start[0])
+//                        .attr("cy", link.start[1])
+//                        .attr("r", 3)
+//                        .call(d3.behavior.drag()
+//                                .on("drag", function() {
+//                                    link.start = [d3.event.x, d3.event.y];
+//                                    d3.select(this)
+//                                            .attr("cx", link.start[0])
+//                                            .attr("cy", link.start[1]);
+//                                    path.datum(toArc(link))
+//                                            .attr("d", area);
+//                                })
+//                );
+//                svg.append("circle")
+//                        .attr("cx", link.end[0])
+//                        .attr("cy", link.end[1])
+//                        .attr("r", 3)
+//                        .call(d3.behavior.drag()
+//                                .on("drag", function() {
+//                                    link.end = [d3.event.x, d3.event.y];
+//                                    d3.select(this)
+//                                            .attr("cx", link.end[0])
+//                                            .attr("cy", link.end[1]);
+//                                    path.datum(toArc(link))
+//                                            .attr("d", area);
+//                                })
+//                );
+                d3.select("#tension")
+                        .on("input", function() {
+                            area.tension(+this.value)
+                            d3.select("#tension-val").text(this.value);
+                            path.attr("d", area);
+                        });
+                d3.select("#width")
+                        .on("input", function() {
+                            link.width = +this.value;
+                            d3.select("#width-val").text(this.value);
+                            path.datum(toArc(link))
+                                    .attr("d", area);
+                        });
+                d3.select("#offset")
+                        .on("input", function() {
+                            link.offset = +this.value;
+                            d3.select("#offset-val").text(this.value);
+                            path.datum(toArc(link))
+                                    .attr("d", area);
+                        });
+
+            }
+
+            createArea(arcs)
+        </script>

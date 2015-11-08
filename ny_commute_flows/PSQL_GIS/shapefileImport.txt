@@ -1,0 +1,66 @@
+In terminal:
+//Import the CTPP tads
+$ shp2pgsql -I -s 4269 /Users/mdowd/Programming/GisWork/shps/clippedTAD.shp clippedTAD | psql -d ctpp_db
+$ shp2pgsql -I -s 4269 /Users/mdowd/Programming/GisWork/tl_2009_us_state/tl_2009_us_state.shp us_statesD | psql -d ctpp_db
+$ shp2pgsql -I -s 4269 /Users/mdowd/Programming/GisWork/ci08au12/ci08au12.shp us_cities | psql -d ctpp_db
+$
+$ shp2pgsql -I -s 4326 /Users/mdowd/newroads.shp roads | psql -d crash
+
+/Users/mdowd/newroads.shp 
+//Spatial join for centroid
+
+create view stateID
+as
+select a.geoid10, b.stusps
+from clippedtad  a, us_states  b
+where ST_Intersects(ST_Centroid(a.geom), b.geom)
+
+//Spatial join create table
+create table stateID
+as
+select a.geoid10, b.stusps, a.x,a.y,a.geom
+from clippedtad  a, us_states  b
+where ST_Intersects(ST_Centroid(a.geom), b.geom)
+
+
+drop table ny_area ;
+create table ny_area as
+select a.geoid10, a.x, a.y, a.geom
+from clippedtad a, us_cities b
+where b.gid = 30629 and ST_DWithin(ST_Centroid(a.geom), b.geom, 1);
+
+
+
+ COPY (select geoid10, x, y from los_angeles_area) to '/Users/mdowd/Programming/GisWork/losAngelesTAD.csv' With CSV HEADER;
+
+
+-- alter table roads2013 add 
+update roads2013 set geom = ST_Transform(geom, 4326)
+
+--ogr2ogr ST_Transform
+ogr2ogr -t_srs EPSG:4269 newroads.shp /Users/mdowd/Programming/Collisions/NYSDOT_AADT_2013/TDV_AADT_2013.shp 
+-- SELECT UpdateGeometrySRID('roads2013','geom',4326);
+
+create view point_extent as
+select 1 as id, ST_SetSRID(ST_Extent(geom),4326) as geom from crash1019  
+where geom is not null;
+
+create table nyc_roads as
+select a.*
+from roads a, point_extent b
+where ST_Intersects(b.geom, a.geom)
+
+
+create table a_crash1 as
+select a.* from (
+select "on street name" as on_street, "cross street name" as off_street, count(index) c,
+sum(per_crash) per_crash, 
+sum(ped_crash) ped_crash,
+sum(mot_crash) mot_crash, 
+sum(cyc_crash) cyc_crash,
+st_centroid(st_union(geom)) as geom
+from crash_working  
+where "on street name" <> '' or  "cross street name" <> ''
+group by on_street, off_street) as a
+where a.per_crash > 1
+
