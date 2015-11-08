@@ -9,6 +9,10 @@
     <script src="libs/leaflet-0.7.3/leaflet-src.js"></script>
     <script src="js/nodeSelector.js"></script>
 
+    <!--SOURCE for bundling algorithm https://github.com/upphiminn/d3.ForceBundle-->
+
+    <script type="text/javascript" src="libs/d3-ForceEdgeBundling.js"></script>
+
     <!--Viz Scripts-->
     <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
@@ -48,7 +52,7 @@
     var nnodes = {};
     var nodeMap = d3.map();
     var maxVal;
-    var unprojectedResults;
+    var results;
     var initialLoad = true;
     var projectedResults;
     var svg;
@@ -71,9 +75,10 @@
     /*
     Source http://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs
      */
-    //Find the center of the coordinates this is for the leaflet map
     function rad2degr(rad) { return rad * 180 / Math.PI; }
     function degr2rad(degr) { return degr * Math.PI / 180; }
+
+
     function getLatLngCenter(latLngInDegr) {
         var LATIDX = 0;
         var LNGIDX = 1;
@@ -102,11 +107,12 @@
         return ([rad2degr(lat), rad2degr(lng)]);
     }
 
+
+
     //Load the Data
     queue()
-            .defer(d3.csv, 'data/nyFlowsClean.csv')
-            .defer(d3.csv, 'data/tadNY.csv')
-            .defer(d3.json, 'data/nyUnresult.json')
+            .defer(d3.csv, 'data/waFlowsClean.csv')
+            .defer(d3.csv, 'data/SeattleAreaTAD.csv')
             .await(initViz);
 
 
@@ -114,10 +120,10 @@
     var widthScale = d3.scale.linear().rangeRound([0, 25]);
 
 
-    function initViz(error, flowsCsv, center, bundle) {
+    function initViz(error, flowsCsv, center) {
         myGlobals.flows = flowsCsv;
         centerCsv = center;
-        unprojectedResults = bundle;
+        console.log("line 147", results)
 
         //IF CSV
         centerCsv.forEach(function (d) {
@@ -128,7 +134,6 @@
             //For Bundles
             nodeMap.set(d.id, [d.lng, d.lat]);
             nnodes[d.id] = {"x": d.lng, "y": d.lat, flowsO:0, flowsD:0, classId:  s9(d.lat).trim() + "_" + s9(d.lng.trim())}
-
         });
 
 
@@ -137,7 +142,7 @@
         //Leaflet Stuff
         map = L.map("sourceMap");
         //Set the zoom based on the coordinates
-        map.setView(mapCenter,map.fitBounds(coords)._zoom+4);
+        map.setView(mapCenter,map.fitBounds(coords)._zoom+1);
         L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
             maxZoom: 18,
             minZoom: 2,
@@ -177,8 +182,9 @@
 
 
     function createViz(data) {
-        createNodes(nnodes);
 
+        //Create node chart
+        createNodes(nnodes);
 
         widthScale.domain([0, myGlobals.maxFlow]);
 
@@ -188,9 +194,9 @@
                 .enter().append("circle")
                 .style({
                     "stroke": "black",
-                    "fill": "green",
-                    "opacity" : 0.4})
-                .attr("r", 3)
+                    "fill": "black",
+                    "opacity" : 0.1})
+                .attr("r", 1)
                 .attr("class", function(d){
                     return "N_" + s9(d.lat) + "_" + s9(d.lng.trim())
                 })
@@ -231,6 +237,26 @@
             return +num.toFixed(8);
         }
 
+
+
+        if (initialLoad){
+            var out = {};
+            for (i in nnodes){
+                var toPoint = map.latLngToLayerPoint([nnodes[i].y, nnodes[i].x]);
+                out[i] = {x: s8(toPoint.x),y:s8(toPoint.y), original: [s9(nnodes[i].y), s9(nnodes[i].x)]}
+            }
+            //Only run the bundling algorithm on the initial load, it is computationally intensive (~5sec)
+            //unprojectedResults will store the master lat long version of the bundle, while
+            //projectedResults will be used draw the svg on the map
+            var fbundling = d3.ForceEdgeBundling().nodes(out).edges(eedges);
+            results   = fbundling();
+            unprojectedResults = unprojectBundle(map, results);
+            initialLoad = false;
+
+        }
+
+
+
         projectedResults = projectBundle(map, unprojectedResults);
 
         var d3line = d3.svg.line()
@@ -239,7 +265,7 @@
                 .interpolate("linear");
 
         //plot the data
-        for(var i = 0; i < unprojectedResults.length; i++){
+        for(var i = 0; i < results.length; i++){
             myGlobals.g
                     .append("path").attr("d", d3line(projectedResults[i]))
                     .attr("class", function (d){
@@ -258,6 +284,29 @@
                         }
                     });
             loaded = true;
+        }
+
+
+
+
+        //This function takes the bundled results and creates a master Lat / Long list of points for paths
+        //This master lat long list can then be updated using the projectBundle function to match the current
+        //zoom level of the "map".
+        function unprojectBundle(theMap, bundledResults) {
+            var count=0;
+            projectedBundle = [];
+
+            bundledResults.forEach(function (d,i) {
+                projectedBundle.push([]);
+                d.forEach(function(d2,i2) {
+                    var lat = d2.x;
+                    var lng = d2.y;
+                    var points = theMap.layerPointToLatLng([lat,lng])
+                    count +=1;
+                    projectedBundle[i].push({x:points.lat, y:points.lng});
+                })
+            });
+            return projectedBundle;
         }
 
         //ProjectBundle converts the master lat long list (unprojectedResults)
