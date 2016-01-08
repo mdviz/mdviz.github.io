@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="libs/d3/d3.min.js" charset="utf-8"></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="libs/queue/queue.min.js"></script>
+
+    <script src="libs/leaflet-0.7.3/leaflet.js"></script>
+    <script src="libs/Leaflet.label-master/src/Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/BaseMarkerMethods.js"></script>
+    <script src="libs/Leaflet.label-master/src/Marker.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/CircleMarker.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/Path.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/Map.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/FeatureGroup.Label.js"></script>
+    <script src="tollZones.js"></script>
+
+
+
+    <!--Viz Scripts-->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="libs/Leaflet.label-master/dist/leaflet.label.css" />
+
+    <title></title>
+
+
+</head>
+<body>
+
+<div class="col-md-12 column" id="sourceMap"></div>
+
+<script>
+    //Do map stuff
+    //Leaflet Stuff
+    map = L.map("sourceMap", { zoomControl:false });
+    var info = L.control({position: 'bottomleft'});
+
+
+    function style(feature) {
+        return {
+            fillColor: getColor(feature.properties.Zones) ,
+            weight: 2,
+            opacity: 1,
+            color: 'black',
+            dashArray: '3',
+            fillOpacity: 0.7
+        };
+    }
+
+    function getColor(d){
+        return d == 1 ? "red":
+                d == 2 ? "blue" :
+                        "black"
+
+
+    }
+
+    L.geoJson(tollZone, {style: style}).addTo(map);
+
+    var north = L.control({position: "topleft"});
+    north.onAdd = function(map) {
+        var div = L.DomUtil.create("div", "arrow");
+        div.innerHTML = '<img src="LeafletNorth.png">';
+        return div;
+    };
+    north.addTo(map);
+    //Set the zoom based on the coordinates
+    map.setView([41.895331, -87.582488], 12);
+    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        minZoom: 2,
+        id: 'mdowd.n6anai1b',
+        access_token: "pk.eyJ1IjoibWRvd2QiLCJhIjoic0xVV3F6cyJ9.-gW3HHcgm-6qeMajHWz5_A"
+    }).addTo(map);
+    L.control.scale({position:'topleft'}).addTo(map);
+
+
+//    d3.csv("toMap_v5.csv", function(data) {
+//
+//        data.forEach(function (i) {
+//
+//
+//            if (true == true) {
+//
+//
+//                if (!isNaN(+i.LAT)){
+//
+////                marker = new L.circle([i.LAT, i.LNG], sizeVal(i.NumberSpaces), {
+//                marker = new L.circle([i.LAT, i.LNG], 3, {
+//                    color: "black",
+//                    stroke: 1,
+//                    fillColor: "gray",
+//                    fillOpacity: 0.7,
+//                    setRadius: 100
+//                }).bindLabel(createLabel(i), {
+//                            noHide: true,
+//                            direction: 'auto'
+//                        })
+//                        .addTo(map)
+//
+//                }
+//            }
+//
+//        });
+//
+////        d3.selectAll('.leaflet-marker-icon').remove()
+//
+//    });
+
+    updateDisplay()
+    function createLabel(valI){
+        return "ADDR: " + valI.Address + '  ||  NS: ' + valI.NumberSpaces + "   ||  UR: " + valI.UtilizationRate*100 + "%" + "   ||  " + valI.CostPerHour;
+    }
+
+    function colorVal(val){
+        console.log(val)
+        var color =
+            val == "$6.50" ? "red" :
+                    val == "$4.00" ? "blue" :
+                            "black";
+
+        return color;
+    }
+
+    function sizeVal(val){
+        var size =
+                val > 20 ? 100:
+                        val > 15 ? 30:
+                                val > 10 ? 20:
+                                    val > 5 ? 18:
+                                            10;
+        return size
+    }
+
+
+    function updateDisplay(){
+//        $('.info').remove();
+        var legendText ="testing,iam"
+        legendText = [legendText[2].split(".")[0], legendText[1]]
+
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update()
+            return this._div;
+        };
+
+        //Control FLow for Labels - sort of a mess but running out of time.
+
+
+
+        info.update = function (asset) {
+            var vals = [{name: "$6.50", color:"red"}, {name: "$4.00", color:"blue"}, {name: "$2.00", color:"black"}];
+            var sc1 =  '<svg width="50" height="25"> <rect width="50" height="25" style="fill: ';
+            var sc2 = ' " stroke-width:3;stroke:rgb(0,0,0)" /> </svg>';
+            var htmlContent= '<p>'  + "Cost Per Hour" + '</p>' + '<br>';
+            vals.forEach(function(d){
+               htmlContent += sc1 + d.color +";" + sc2 +  '<span style=vertical-align:10px; ">  ' + d.name + '</span>' + " <br>"
+            });
+            console.log(htmlContent)
+            this._div.innerHTML = htmlContent;
+        };
+        info.addTo(map);
+
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+a.page-scroll {
+    color: #ffffff;
+    border-bottom: 1px #000000 solid;
+
+}
+
+#sourceMap{
+    width: 1500px;
+    height: 1000px;
+    background-color: #D1D1D1;
+}
+
+
+.info, h4{
+    padding:10px;
+    color: black;
+    font: 16px/14px "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.info p {
+    position:relative;
+    font-size: 20px;
+    margin-top: 20px;
+}

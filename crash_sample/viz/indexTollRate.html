@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="libs/d3/d3.min.js" charset="utf-8"></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="libs/queue/queue.min.js"></script>
+
+    <script src="libs/leaflet-0.7.3/leaflet.js"></script>
+    <script src="libs/Leaflet.label-master/src/Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/BaseMarkerMethods.js"></script>
+    <script src="libs/Leaflet.label-master/src/Marker.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/CircleMarker.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/Path.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/Map.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/FeatureGroup.Label.js"></script>
+
+
+
+    <!--Viz Scripts-->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="libs/Leaflet.label-master/dist/leaflet.label.css" />
+
+    <title></title>
+
+
+</head>
+<body>
+
+<div class="col-md-12 column" id="sourceMap"></div>
+
+<script>
+    //Do map stuff
+    //Leaflet Stuff
+    map = L.map("sourceMap", { zoomControl:false });
+    var info = L.control({position: 'bottomleft'});
+    var north = L.control({position: "topleft"});
+    north.onAdd = function(map) {
+        var div = L.DomUtil.create("div", "arrow");
+        div.innerHTML = '<img src="LeafletNorth.png">';
+        return div;
+    };
+    north.addTo(map);
+    //Set the zoom based on the coordinates
+    map.setView([41.895331, -87.582488], 12);
+    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        minZoom: 2,
+        id: 'mdowd.n6anai1b',
+        access_token: "pk.eyJ1IjoibWRvd2QiLCJhIjoic0xVV3F6cyJ9.-gW3HHcgm-6qeMajHWz5_A"
+    }).addTo(map);
+    L.control.scale({position:'topleft'}).addTo(map);
+
+
+    d3.csv("toMap_v5.csv", function(data) {
+
+        data.forEach(function (i) {
+
+//            if (+i.LAT < 39.68) {
+            if (true == true) {
+
+//                var myIcon = L.icon({
+//                    iconUrl: 'my-icon.png',
+//                    iconSize: [0, 0],
+//                    iconAnchor: [5, 0],
+//                    labelAnchor: [-2, 0] // as I want the label to appear 2px past the icon (10 + 2 - 6)
+//                });
+//
+//                labelMarker = new L.marker([i.LAT, i.LNG], {
+//                    icon: myIcon
+//                }).bindLabel(i.Company, {
+//                    noHide: true,
+//                    direction: 'auto'
+//                })
+//                        .addTo(map)
+//                ;
+
+               //console.log(i)
+
+                if (!isNaN(+i.LAT)){
+
+//                marker = new L.circle([i.LAT, i.LNG], sizeVal(i.NumberSpaces), {
+                marker = new L.circle([i.LAT, i.LNG], 10, {
+                    color: colorVal(+i.CostPerHour),
+                    fillColor: colorVal(+i.CostPerHour),
+                    fillOpacity: 0.5,
+                    setRadius: 100
+                }).bindLabel(createLabel(i), {
+                            noHide: true,
+                            direction: 'auto'
+                        })
+                        .addTo(map)
+
+                }
+            }
+
+        });
+
+        updateDisplay();
+//        d3.selectAll('.leaflet-marker-icon').remove()
+
+    });
+
+
+    function createLabel(valI){
+        return "ADDR: " + valI.Address + '  ||  NS: ' + valI.NumberSpaces + "   ||  UR: " + valI.UtilizationRate*100 + "%" + "   ||  " + valI.CostPerHour;
+    }
+
+    function colorVal(val){
+        console.log(val)
+        var color =
+            val == 6.5 ? "red" :
+                    val == 4.0 ? "blue" :
+                            val == 0.5 ? "#339933":
+                            "black";
+
+        return color;
+    }
+
+    function sizeVal(val){
+        var size =
+                val > 20 ? 100:
+                        val > 15 ? 30:
+                                val > 10 ? 20:
+                                    val > 5 ? 18:
+                                            10;
+        return size
+    }
+
+
+    function updateDisplay(){
+//        $('.info').remove();
+        var legendText ="testing,iam"
+        legendText = [legendText[2].split(".")[0], legendText[1]]
+
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update()
+            return this._div;
+        };
+
+        //Control FLow for Labels - sort of a mess but running out of time.
+
+        info.update = function (asset) {
+            var vals = [{name: "$6.50", color:"red"}, {name: "$4.00", color:"blue"}, {name: "$2.00", color:"black"} , {name: "$0.50", color:"#339933"}];
+            var sc1 =  '<svg height="50" width="50"><circle cx="20" cy="20"  stroke= ';
+            var sc2 = ' stroke-width="3" fill=';
+            var sc3 = ' r="7" /></svg>';
+            var htmlContent= '<p>'  + "Cost Per Hour " + '</p>' + '<br>';
+            vals.forEach(function(d){
+               htmlContent +=  sc1 + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
+            });
+            console.log(htmlContent)
+            this._div.innerHTML = htmlContent;
+        };
+        info.addTo(map);
+
+    }
+
+</script>
+
+</body>
+</html>
