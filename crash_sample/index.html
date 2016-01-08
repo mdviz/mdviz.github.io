@@ -39,13 +39,13 @@
 
     var viz_globals = {};
 
-    //////
-    function initialize() {
-        var fenway = {lat: 42.345573, lng: -71.098326};
+    //////40.688908, -73.980983
+    function initialize(plat,plong) {
+        var fulton = {lat: plat, lng: plong};
 
         var panorama = new google.maps.StreetViewPanorama(
                 document.getElementById('SView'), {
-                    position: fenway,
+                    position: fulton,
                     pov: {
                         heading: 34,
                         pitch: 10
@@ -101,14 +101,12 @@
 
     function sizeVal(val){
         var size =
-                val > 500 ? 175:
-                    val > 350 ? 125:
-                        val > 200 ? 100:
-                            val > 100 ? 50:
-                                val > 75 ? 25:
-                                        val > 50 ? 10:
-                                                val > 20 ? 0 :
-                                                        0;
+                val > 50 ? 30:
+                    val > 40 ? 25:
+                        val > 30 ? 20:
+                            val > 20 ? 15:
+                                val > 10 ? 10:
+                                        5;
         return size
     }
 
@@ -182,17 +180,22 @@
 
         addOverlay();
 
+        function onClick(e){
+            console.log(e.latlng)
+            initialize(e.latlng.lat, e.latlng.lng)
+        }
+
         data.forEach(function (i) {
                 if ( !isNaN(+i.x) ) {
 
-                marker = new L.circle([i.y, i.x], 10, {
+                marker = new L.circle([i.y, i.x], sizeVal(i.total), {
                     color: colorVal(+i.fat, +i.inj),
                     fillColor: colorVal(+i.fat),
                     fillOpacity: +i.fat > 0 ? .7 :.3
                 }).bindLabel(createLabel(i), {
                             noHide: true,
                             direction: 'auto'
-                        })
+                        }).on('click', onClick)
                         .addTo(map)
 
                 }
@@ -254,7 +257,7 @@
 
 </script>
 
-<div id="SView" style="width:400px; height: 400px;">
+<div id="SView" style="width:800px; height: 400px;">
 
 
 
