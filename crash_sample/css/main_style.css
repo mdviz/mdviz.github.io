@@ -5,9 +5,10 @@ a.page-scroll {
 }
 
 #sourceMap{
-    width: 800px;
-    height: 600px;
+    width: 700px;
+    height: 800px;
     background-color: #D1D1D1;
+
 }
 
 
@@ -25,4 +26,16 @@ a.page-scroll {
     position:relative;
     font-size: 20px;
     margin-top: 20px;
+}
+
+#SView  {
+    width: 700px;
+    height: 800px;
+    background-color: #D1D1D1;
+}
+
+#SView  p{
+    margin-right: auto;
+    width: 16em;
+    font-weight: bold;
 }
