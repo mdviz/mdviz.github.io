@@ -2,10 +2,12 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <!--Libraries-->
     <script src="libs/d3/d3.min.js" charset="utf-8"></script>
     <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
     <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="libs/queue/queue.min.js"></script>
+    <script src="libs/sprintf-js/src/sprintf.js"></script>
 
     <script src="libs/leaflet-0.7.3/leaflet.js"></script>
     <script src="libs/Leaflet.label-master/src/Label.js"></script>
@@ -62,8 +64,6 @@
      */
     function rad2degr(rad) { return rad * 180 / Math.PI; }
     function degr2rad(degr) { return degr * Math.PI / 180; }
-
-
     function getLatLngCenter(latLngInDegr) {
         var LATIDX = 0;
         var LNGIDX = 1;
@@ -115,9 +115,21 @@
     }
 
     function addOverlay(){
+
+        function overLayColor(d){
+            return d == 60 ? "red":
+                    "black"
+        }
+
+        function onEachFeature(feature, layer) {
+            var popupContent = "<p>Total Injured/Killed: %s </p> <p>Total Injured: %s </p> <p>Total Killed: %s </p>";
+            popupContent = vsprintf(popupContent,[feature.properties.total, feature.properties.inj, feature.properties.fat])
+            layer.bindPopup(popupContent);
+        }
+
         function style(feature) {
             return {
-                fillColor: getColor(feature.properties.dn) ,
+                fillColor: overLayColor(feature.properties.dn) ,
                 weight: 1,
                 opacity: 1,
                 color: 'black',
@@ -126,24 +138,9 @@
             };
         }
 
-        function getColor(d){
-            return d == 60 ? "red":
-                            "black"
 
 
-        }
 
-        function onEachFeature(feature, layer) {
-            var popupContent = "<p>Total Injured/Killed: " +  feature.properties.total + "</p>  " +
-                    "<p>Total Injured: " + feature.properties.inj + " </p>   " +
-                    "<p>Total Killed: " + feature.properties.fat + " </p>";
-
-//            if (feature.properties && feature.properties.popupContent) {
-//                popupContent += feature.properties.popupContent;
-//            }
-
-            layer.bindPopup(popupContent);
-        }
 
         L.geoJson(bar60, {style: style,onEachFeature: onEachFeature}).addTo(map);
         L.geoJson(bar30, {style: style,onEachFeature: onEachFeature}).addTo(map);
@@ -162,7 +159,7 @@
         //Leaflet Stuff
         map = L.map("sourceMap", { zoomControl:false });
 
-        var info = L.control({position: 'bottomleft'});
+        viz_globals.info = L.control({position: 'bottomleft'});
         var north = L.control({position: "topleft"});
         north.onAdd = function(map) {
             var div = L.DomUtil.create("div", "arrow");
@@ -209,7 +206,7 @@
 
 
 
-//        updateDisplay();
+      //  updateDisplay();
         d3.selectAll('.leaflet-marker-icon').remove()
 
     });
@@ -223,7 +220,7 @@
         var legendText ="testing,iam"
         legendText = [legendText[2].split(".")[0], legendText[1]]
 
-        info.onAdd = function (map) {
+        viz_globals.info.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info');
             this.update();
             return this._div;
@@ -231,7 +228,7 @@
 
         //Control FLow for Labels - sort of a mess but running out of time.
 
-        info.update = function (asset) {
+        viz_globals.info.update = function (asset) {
             var vals = [{name: "More than 75%", color:"yellow"}, {name: "50%-75%", color:"red"}, {name: "25%-50%", color:"blue"}, {name: "Less than 25%", color:"black"} ];
             var sc1 =  '<svg height="50" width="50"><circle cx="20" cy="20"  stroke= ';
             var sc2 = ' stroke-width="3" fill=';
@@ -240,10 +237,9 @@
             vals.forEach(function(d){
                htmlContent +=  sc1 + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
             });
-            console.log(htmlContent)
             this._div.innerHTML = htmlContent;
         };
-        info.addTo(map);
+        viz_globals.info.addTo(map);
 
 
 
