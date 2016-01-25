@@ -8,7 +8,7 @@
     <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
     <!--<script src="libs/queue/queue.min.js"></script>-->
     <script src="libs/sprintf-js/src/sprintf.js"></script>
-
+    <script src="libs/rangeslider/dist/rangeslider.js"></script>
     <script src="libs/leaflet-0.7.3/leaflet.js"></script>
     <script src="libs/Leaflet.label-master/src/Label.js"></script>
     <script src="libs/Leaflet.label-master/src/BaseMarkerMethods.js"></script>
@@ -26,20 +26,37 @@
     <!--Stylesheets-->
     <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
-    <link rel="stylesheet" type="text/css" href="css/main_style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="libs/Leaflet.label-master/dist/leaflet.label.css" />
+    <link rel="stylesheet" type="text/css" href="css/main_style.css">
 
     <title></title>
 
 
 </head>
 <body>
-<div class="col-md-12"> <p>NYC Crashes</p> </div>
+
+<div   class="col-md-12 column" id="slider_div">
+    <label><span type="text" id="textInput" value=""></span></label>
+    <input type="range" name="rangeInput" value="2001" min="2001" max="2014" oninput="updateTextInput(this.value);" style="width: 250px;"/>
+
+</div>
 <div class="col-md-6 column" id="sourceMap"></div>
 
 <script>
+    function updateTextInput(val) {
+        $('#textInput').text(val)
+        updateViz(+val)
+//        onchange="updateVizYear(this.value)"
+    }
+    $('#textInput').text($('input').val());
+
+
     var viz_globals = {};
+    var map;
+    var crash_year;
+    var grp_crash_year;
+
 
     function initialize(plat,plong) {
         var fulton = {lat: plat, lng: plong};
@@ -139,11 +156,16 @@
     }
 
 
-
+    var node_set = d3.map();
     d3.csv("data/webCrashes.csv", function(data) {
+
+        //Set up the inital data and masterid lookup
         viz_globals.data = data;
         var coords = [];
-        viz_globals.data.forEach(function(d) {coords.push([d.y, d.x])});
+        viz_globals.data.forEach(function(d) {
+            node_set.set(d.masterid, [d.y, d.x]);
+            coords.push([d.y, d.x])
+        });
 
         //Do map stuff
         //Leaflet Stuff (zoom level, center, north arrow, etc)
@@ -168,65 +190,147 @@
         }).addTo(map);
         L.control.scale({position:"topleft"}).addTo(map);
 
+
+
         //Add the heat map polygons
         addOverlay();
 
         //onPoint Click show the Street view.
-        function onClick(e){
-            initialize(e.latlng.lat, e.latlng.lng)
-        }
+//        function onClick(e){
+//            initialize(e.latlng.lat, e.latlng.lng)
+//        }
 
-        data.forEach(function (i) {
-                if ( !isNaN(+i.x) ) {
-
-                marker = new L.circle([i.y, i.x], sizeVal(i.total), {
-                    color: colorVal(+i.fat, +i.inj),
-                    fillColor: colorVal(+i.fat),
-                    fillOpacity: +i.fat > 0 ? .7 :.3
-                }).bindLabel(createLabel(i), {
-                            noHide: true,
-                            direction: 'auto'
-                        }).on('click', onClick)
-                        .addTo(map)
-
-                }
-        });
+//        data.forEach(function (i) {
+//                if ( !isNaN(+i.x) ) {
+////
+//                    node_set.set(i.masterid, [i.y, i.x]);
+////                    marker = new L.circle([i.y, i.x], sizeVal(i.total), {
+////                        color: colorVal(+i.fat, +i.inj),
+////                        fillColor: colorVal(+i.fat),
+////                        fillOpacity: +i.fat > 0 ? .7 :.3
+////                }).bindLabel(createLabel(i), {
+////                            noHide: true,
+////                            direction: 'auto'
+////                        }).on('click', onClick)
+////                        .addTo(map)
+////
+//                }
+//        });
 
       //  updateDisplay();
-        d3.selectAll('.leaflet-marker-icon').remove()
+        d3.selectAll('.leaflet-marker-icon').remove();
+
+
+        //D3 stuff
+
+        map._initPathRoot();
+        svg = d3.select("#sourceMap").select("svg");
+        g = svg.append("g").attr("class","displayed");
+
+        //Nested this csv load because we need the node_set populated before loading
+        d3.csv("data/crash_year_by_type.csv", function(data) {
+
+            viz_globals.crash_by_year = data;
+            viz_globals.grp_crash_year = _.groupBy(data, 'case_yr');
+
+            updateViz(+$('input').val());
+
+
+        });
     });
+
+
 
     function createLabel(valI){
         return "Fatalities: " + valI.fat + '  ||  Injuries: ' + valI.inj;
     }
 
-    function updateDisplay(){
-        $('.info').remove();
+//    function updateDisplay(){
+//        $('.info').remove();
+//
+//        viz_globals.info.onAdd = function (map) {
+//            this._div = L.DomUtil.create('div', 'info');
+//            this.update();
+//            return this._div;
+//        };
+//
+//        //Control FLow for Labels - sort of a mess but running out of time.
+//
+//        viz_globals.info.update = function (asset) {
+//            var vals = [{name: "More than 75%", color:"yellow"}, {name: "50%-75%", color:"red"}, {name: "25%-50%", color:"blue"}, {name: "Less than 25%", color:"black"} ];
+//            var sc1 =  '<svg height="50" width="50"><circle cx="20" cy="20"  stroke= ';
+//            var sc2 = ' stroke-width="3" fill=';
+//            var sc3 = ' r="7" /></svg>';
+//            var htmlContent= '<p>'  + "Utilization Rate" + '</p>' + '<br>';
+//            vals.forEach(function(d){
+//               htmlContent +=  sc1 + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
+//            });
+//            this._div.innerHTML = htmlContent;
+//        };
+//        viz_globals.info.addTo(map);
+//
+//    }
 
-        viz_globals.info.onAdd = function (map) {
-            this._div = L.DomUtil.create('div', 'info');
-            this.update();
-            return this._div;
-        };
 
-        //Control FLow for Labels - sort of a mess but running out of time.
+    function updateViz(year){
 
-        viz_globals.info.update = function (asset) {
-            var vals = [{name: "More than 75%", color:"yellow"}, {name: "50%-75%", color:"red"}, {name: "25%-50%", color:"blue"}, {name: "Less than 25%", color:"black"} ];
-            var sc1 =  '<svg height="50" width="50"><circle cx="20" cy="20"  stroke= ';
-            var sc2 = ' stroke-width="3" fill=';
-            var sc3 = ' r="7" /></svg>';
-            var htmlContent= '<p>'  + "Utilization Rate" + '</p>' + '<br>';
-            vals.forEach(function(d){
-               htmlContent +=  sc1 + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
+        d3.selectAll('.crashes').remove();
+        viz_globals.grp_crash_year[year].forEach(function(d){
+            var coord = node_set.get(d.masterid);
+            d.LatLng = new L.LatLng(coord[0], coord[1])
+        });
+
+        viz_globals.max_val = 0;
+
+        //Find max for any one intersection
+        d3.range(2001,2015).forEach(function(y){
+            temp_max = d3.max(viz_globals.grp_crash_year[y], function(d) {
+               // console.log(d.total)
+                return +d.a_total
             });
-            this._div.innerHTML = htmlContent;
-        };
-        viz_globals.info.addTo(map);
+            viz_globals.max_val = temp_max > viz_globals.max_val ? temp_max : viz_globals.max_val;
+        });
+
+        console.log(viz_globals.max_val);
 
 
+
+        viz_globals.feature = g.selectAll("circle")
+                .data(viz_globals.grp_crash_year[year])
+                .enter().append("circle")
+                .attr("class", function(d) {return "crashes"})
+                .attr("r", function(d){
+                    return +d.a_total*2
+                })
+                .style("opacity", function(d) {
+                    return d.a_fat > 0 ? 0.7 : 0.3
+                })
+                .style("fill",  function(d) {
+                    return d.a_fat > 0 ? 'red' : 'black'
+                }).on("click", function(){
+                    var e =  this.__data__.LatLng;
+                    initialize(e.lat, e.lng)
+                });
+        map.on("viewreset", reset);
+        reset();
 
     }
+
+    function reset() {
+        viz_globals.feature.attr("transform",
+                function(d) {
+                    return "translate("+
+                            map.latLngToLayerPoint(d.LatLng).x +","+
+                            map.latLngToLayerPoint(d.LatLng).y +")";}
+        )
+    }
+
+    function updateVizYear(val){
+        updateViz(val)
+    }
+
+
+
 
 </script>
 

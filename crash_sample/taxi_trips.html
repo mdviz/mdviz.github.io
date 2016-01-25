@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="libs/d3/d3.min.js" charset="utf-8"></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="libs/queue/queue.min.js"></script>
+
+    <script src="libs/leaflet-0.7.3/leaflet.js"></script>
+    <script src="libs/Leaflet.label-master/src/Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/BaseMarkerMethods.js"></script>
+    <script src="libs/Leaflet.label-master/src/Marker.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/CircleMarker.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/Path.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/Map.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/FeatureGroup.Label.js"></script>
+
+
+
+    <!--Viz Scripts-->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="libs/Leaflet.label-master/dist/leaflet.label.css" />
+
+    <title></title>
+
+
+</head>
+<body>
+
+
+
+
+
+<div class="col-md-12 column" id="sourceMap"></div>
+
+
+<script>
+    var info = L.control({position: 'bottomleft'});
+
+    index = 0;
+    //Do map stuff
+    //Leaflet Stuff
+    map = L.map("sourceMap");
+    //Set the zoom based on the coordinates
+    map.setView([40.687498, -73.978731], 12);
+    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        minZoom: 2,
+        id: 'mdowd.n6anai1b',
+        access_token: "pk.eyJ1IjoibWRvd2QiLCJhIjoic0xVV3F6cyJ9.-gW3HHcgm-6qeMajHWz5_A"
+    }).addTo(map);
+    L.control.scale().addTo(map);
+
+    var taxi;
+    Lpoints = new L.layerGroup();
+    Rpoints = new L.layerGroup();
+    recordPoints = [];
+
+    d3.csv("data/taxi_sample1.csv", function(data) {
+        taxi = data;
+        d3.selectAll('.leaflet-marker-icon').remove()
+        start();
+    });
+
+
+    function drawPoint(point){
+        recordPoints.push(point)
+        Lpoints.addLayer(L.circle([+point.latitude, +point.longitude], 100, {
+                    color: 'yellow',
+                    fillColor: 'yellow',
+                    opacity: 1,
+                    fillOpacity: 1,
+                    className: 'top'
+                })
+        );
+
+
+        Rpoints.addLayer(L.circle([+point.latitude, +point.longitude], 20, {
+                    color: 'red',
+                    fillColor: 'red',
+                    fillOpacity: 0.4,
+                    opacity: 0.4
+                })
+        );
+
+
+        map.addLayer(Rpoints);
+        map.addLayer(Lpoints);
+
+    }
+
+    function run() {
+        if (index >= taxi.length){
+            clearInterval(Interval)
+
+        } else {
+            updateDisplay(taxi[index])
+            Lpoints.clearLayers();
+            drawPoint(taxi[index]);
+            index += 1
+        }
+
+    }
+    function removePoints(){}
+
+    function start(){
+        incrementForward = true;
+        Interval = setInterval(run, 100)
+    }
+
+
+
+    function updateDisplay(point){
+        $('.info').remove();
+        var legendText = point.lpep_datetime;
+
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+
+            this.update();
+            return this._div;
+        };
+
+        //Control FLow for Labels - sort of a mess but running out of time.
+
+        info.update = function (asset) {
+            this._div.innerHTML = '<h4>' + legendText +  '-' + 'record #' + index + '</h4>'
+        };
+        info.addTo(map);
+
+    }
+
+    start()
+</script>
+
+</body>
+</html>

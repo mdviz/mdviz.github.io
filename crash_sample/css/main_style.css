@@ -39,3 +39,37 @@ a.page-scroll {
     width: 16em;
     font-weight: bold;
 }
+
+#sliderDiv{
+    height: 50px;
+    width: 100%;
+}
+
+label {
+    font-size: 15px;
+    color: #333;
+    height: 20px;
+    width: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: right;
+    clear: both;
+    float:left;
+    margin-right:15px;
+}
+
+input {
+    height: 20px;
+    width: 30px;
+    border: 1px solid #000;
+    margin-top: 10px;
+    float: left;
+}
+
+.crashes:hover{
+    cursor: hand !important;
+}
+
+.top {
+    z-index: 100;
+}
