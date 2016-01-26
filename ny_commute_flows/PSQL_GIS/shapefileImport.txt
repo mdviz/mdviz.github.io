@@ -1,6 +1,6 @@
 In terminal:
 //Import the CTPP tads
-$ shp2pgsql -I -s 4269 /Users/mdowd/Programming/GisWork/shps/clippedTAD.shp clippedTAD | psql -d ctpp_db
+$ shp2pgsql -I -s 4326 /Users/mdowd/Programming/GisWork/shps/clippedTAD.shp clippedTAD | psql -d ctpp_db
 $ shp2pgsql -I -s 4269 /Users/mdowd/Programming/GisWork/tl_2009_us_state/tl_2009_us_state.shp us_statesD | psql -d ctpp_db
 $ shp2pgsql -I -s 4269 /Users/mdowd/Programming/GisWork/ci08au12/ci08au12.shp us_cities | psql -d ctpp_db
 $
