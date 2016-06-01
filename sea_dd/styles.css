@@ -12,3 +12,7 @@
     font-family: "Helvetica Neue",sans-serif;
     font-size: x-large;
 }
+
+body {
+    margin-left: 150px;
+}
