@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Seattle DD Results</title>
+        
+<link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.10.0.min.css" type="text/css" />
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+<script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.10.0.min.js"></script>
+<script type="text/javascript" src="data_rf.js"></script>
+<script type="text/javascript" src="data_rt.js"></script>
+<script type="text/javascript" src="data_lm.js"></script>
+<script type="text/javascript">
+    Bokeh.set_log_level("info");
+</script>
+    </head>
+    <body>
+    <div class="intro">Seattle Data Dive Objective 1 Results </div>
+    <div class="my_titles">Observed ADT vs. Linear Regression Predictions</div>
+    <div class="plotdiv" id="46f19027-afe4-4408-abbc-a604cccdaaf5"></div>
+    <script type="text/javascript">
+        Bokeh.$(function() {
+
+            Bokeh.load_models(data_lm);
+            var plots_lm = [{'modeltype': 'Plot', 'elementid': '46f19027-afe4-4408-abbc-a604cccdaaf5', 'modelid': '850ff61d-cded-4e3f-a2ee-224c775685f8'}];
+            for (idx in plots_lm) {
+                var plot_lm = plots_lm[idx];
+                var model = Bokeh.Collections(plot_lm.modeltype).get(plot_lm.modelid);
+                Bokeh.logger.info('Realizing plot:')
+                Bokeh.logger.info(' - modeltype: ' + plot_lm.modeltype);
+                Bokeh.logger.info(' - modelid: ' + plot_lm.modelid);
+                Bokeh.logger.info(' - elementid: ' + plot_lm.elementid);
+                var view1 = new model.default_view({
+                    model: model,
+                    el: '#' + plot_lm.elementid
+                });
+                Bokeh.index[plot_lm.modelid] = view1;
+            }
+        });
+    </script>
+    <div><img src="ADT_Diff_LM_small.png"></div>
+
+
+    <div class="my_titles">Observed ADT vs. Regression Tree Predictions</div>
+    <div class="plotdiv" id="84dd9172-f97b-45eb-8227-86fb5569c25d"></div>
+    <script type="text/javascript">
+        Bokeh.$(function() {
+
+            Bokeh.load_models(data_rt);
+            var plots_rt = [{'modeltype': 'Plot', 'elementid': '84dd9172-f97b-45eb-8227-86fb5569c25d', 'modelid': '121fa9fe-d855-4c3b-bb50-c55f498f2fc9'}];
+            for (idx in plots_rt) {
+                var plot_rt = plots_rt[idx];
+                var model = Bokeh.Collections(plot_rt.modeltype).get(plot_rt.modelid);
+                Bokeh.logger.info('Realizing plot:')
+                Bokeh.logger.info(' - modeltype: ' + plot_rt.modeltype);
+                Bokeh.logger.info(' - modelid: ' + plot_rt.modelid);
+                Bokeh.logger.info(' - elementid: ' + plot_rt.elementid);
+                var view3 = new model.default_view({
+                    model: model,
+                    el: '#' + plot_rt.elementid
+                });
+                Bokeh.index[plot_rt.modelid] = view3;
+            }
+        });
+    </script>
+    <div><img src="ADT_Diff_RegTree_small.png"></div>
+
+
+        <div class="my_titles">Observed ADT vs. Random Forest Predictions</div>
+        <div class="plotdiv" id="65bbbf98-430b-47ee-ae97-4073992b33c0"></div>
+        <script type="text/javascript">
+            Bokeh.$(function() {
+
+            Bokeh.load_models(data_rf);
+            var plots = [{'modeltype': 'Plot', 'elementid': '65bbbf98-430b-47ee-ae97-4073992b33c0', 'modelid': '5e379b42-2129-4c1d-abd6-498f350deaa5'}];
+            for (idx in plots) {
+            	var plot = plots[idx];
+            	var model = Bokeh.Collections(plot.modeltype).get(plot.modelid);
+            	Bokeh.logger.info('Realizing plot:')
+            	Bokeh.logger.info(' - modeltype: ' + plot.modeltype);
+            	Bokeh.logger.info(' - modelid: ' + plot.modelid);
+            	Bokeh.logger.info(' - elementid: ' + plot.elementid);
+            	var view2 = new model.default_view({
+            		model: model,
+            		el: '#' + plot.elementid
+            	});
+            	Bokeh.index[plot.modelid] = view2;
+            }
+        });
+        </script>
+
+    <div><img src="ADT_Diff_RF_small.png"></div>
+
+    </body>
+</html>
