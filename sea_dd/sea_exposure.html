@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seattle Demo Day 2</title>
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.10.0.min.css" type="text/css" />
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.10.0.min.js"></script>
+    <script type="text/javascript" src="ada.js"></script>
+    <script type="text/javascript" src="rfr_d2.js"></script>
+
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+    <script type="text/javascript">
+        Bokeh.$(function() {
+            Bokeh.load_models(rfr_all_models);
+            var rfr_plots = [{'modeltype': 'Plot', 'elementid': 'd260cc2f-a243-462a-a268-3bc108782381', 'modelid': '181fcf8e-1fc4-4341-aa1e-dc7304a83051'}];
+            for (idx in rfr_plots) {
+                var rfr_plot = rfr_plots[idx];
+                var model = Bokeh.Collections(rfr_plot.modeltype).get(rfr_plot.modelid);
+                Bokeh.logger.info('Realizing plot:')
+                Bokeh.logger.info(' - modeltype: ' + rfr_plot.modeltype);
+                Bokeh.logger.info(' - modelid: ' + rfr_plot.modelid);
+                Bokeh.logger.info(' - elementid: ' + rfr_plot.elementid);
+                var view1 = new model.default_view({
+                    model: model,
+                    el: '#' + rfr_plot.elementid
+                });
+                Bokeh.index[rfr_plot.modelid] = view1;
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        Bokeh.$(function() {
+            Bokeh.load_models(ada_all_models);
+            var ada_plots = [{'modeltype': 'Plot', 'elementid': 'a699c00d-7753-4812-9705-0d30c933260e', 'modelid': '6e733722-81a6-4a31-a593-f185b9733905'}];
+            for (idx in ada_plots) {
+                var ada_plot = ada_plots[idx];
+                var model = Bokeh.Collections(ada_plot.modeltype).get(ada_plot.modelid);
+                Bokeh.logger.info('Realizing plot:')
+                Bokeh.logger.info(' - modeltype: ' + ada_plot.modeltype);
+                Bokeh.logger.info(' - modelid: ' + ada_plot.modelid);
+                Bokeh.logger.info(' - elementid: ' + ada_plot.elementid);
+                var view2 = new model.default_view({
+                    model: model,
+                    el: '#' + ada_plot.elementid
+                });
+                Bokeh.index[ada_plot.modelid] = view2;
+            }
+        });
+    </script>
+
+</head>
+<body>
+<div class="intro">Seattle Data Dive Objective 1 Results</div>
+
+<div class="intro2">Vehicle Exposure Model</div>
+
+<div>Correlation Summary:  </div>
+<div><img src="DemoDay2/corr2.png">
+    <p>Key: ADA = ADA Boost Regression, RFR = Random Forest</p>
+</div>
+<div class="my_titles">Observed ADT vs. Random Forest Regressor</div>
+<div class="plotdiv" id="d260cc2f-a243-462a-a268-3bc108782381"></div>
+<div><img src="DemoDay2/rfr_importances.png"></div>
+<div class="my_titles">Observed ADT vs. ADA Boosted Regression</div>
+<div class="plotdiv" id="a699c00d-7753-4812-9705-0d30c933260e"></div>
+<div><img src="DemoDay2/ada_importances.png"></div>
+
+</body>
+</html>

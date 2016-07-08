@@ -13,6 +13,17 @@
     font-size: x-large;
 }
 
+
+.intro2{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    font-weight: bold;
+    font-family: "Helvetica Neue",sans-serif;
+    font-size: x-large;
+    text-decoration: underline;
+}
+
 body {
     margin-left: 150px;
 }
