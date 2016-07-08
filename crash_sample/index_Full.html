@@ -21,8 +21,9 @@
     <script src="libs/underscore/underscore-min.js"></script>
 
     <!--Data Loads-->
-    <script src="data/polySum180.js"></script>
-    <script src="data/polySum250.js"></script>
+    <script src="data/NYC_BorosSimple.js"></script>
+    <script src="data/feb1_polysum100_180.js"></script>
+    <script src="data/feb1_polysum180plus.js"></script>
     <!--Stylesheets-->
     <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
@@ -40,9 +41,13 @@
 
 <script>
     var viz_globals = {};
-    buf180[0].features.forEach(function(d){
-        d.properties['dn'] = 180
-    });
+
+    var cols = "total_entrances,degree,total_racks,stwidth,"
+        +"max_stwidth,aadt2,total_stations,garagearea,avg_numfloors,"
+        +"avg_builtfar,avg_bldgdepth,lotarea,resarea,"
+        + "max_numfloors,comarea,unitsres,officearea,avg_residfar,retailarea,bldgarea,avg_assesstot,"
+        + "avg_commfar,unitstotal";
+    cols = cols.split(',');
 
     function initialize(plat,plong) {
         var fulton = {lat: plat, lng: plong};
@@ -115,14 +120,17 @@
     function addOverlay(){
 
         function overLayColor(d){
-            console.log(d)
-            return d == 180 ? "gray":
-                    "darkRed"
+            return d == 180 ? "darkRed":
+                    "gray"
         }
 
         function onEachFeature(feature, layer) {
             var popupContent = "<p>Total Injured/Killed: %s </p> <p>Total Injured: %s </p> <p>Total Killed: %s </p>";
-            popupContent = vsprintf(popupContent,[+feature.properties.inj+ +feature.properties.fat, feature.properties.inj, feature.properties.fat])
+            popupContent = vsprintf(popupContent,[+feature.properties.inj+ +feature.properties.fat, feature.properties.inj,
+                feature.properties.fat]);
+
+
+
             layer.bindPopup(popupContent);
 
             layer.on('mouseover', function(e){
@@ -140,14 +148,16 @@
                 weight:.4,
                 opacity: 1,
                 color: 'black',
-                fillOpacity: feature.properties.dn == 180 ? 0.2 : 0.4
+                fillOpacity: feature.properties.dn == 180 ? 0.2 : 0.4,
+                class: feature.properties.gid
             };
         }
 
         //Add the polygon layers
+        L.geoJson(boros, {style: style}).addTo(map);
 
-        L.geoJson(buf180, {style: style,onEachFeature: onEachFeature}).addTo(map);
-        L.geoJson(buf250, {style: style,onEachFeature: onEachFeature}).addTo(map);
+        L.geoJson(feb1_polysum100_180, {style: style,onEachFeature: onEachFeature}).addTo(map);
+        L.geoJson(feb1_polysum180plus, {style: style,onEachFeature: onEachFeature}).addTo(map);
     }
 
 
@@ -216,8 +226,20 @@
         d3.selectAll('.leaflet-marker-icon').remove()
     });
 
+    var format = d3.format("0,000")
     function createLabel(valI){
-        return "MasterID: " + valI.masterid +" || Fatalities: " + valI.fat + '  ||  Injuries: ' + valI.inj;
+        var out =  "MasterID: " + valI.masterid +" || Fatalities: " + valI.fat + '  ||  Injuries: ' + valI.inj;
+        out += "<p> <ul> ";
+        cols.forEach(function(d){
+            if (+valI[d]===0){
+                out += "<li>" + d + ": " + 0 + "</li>"
+            } else {
+                out += "<li>" + d + ": " + format(Math.round(valI[d]*100)/100) + "</li>"
+            }
+
+        });
+        out += "</ul></p>";
+        return out
     }
 
     function updateDisplay(){

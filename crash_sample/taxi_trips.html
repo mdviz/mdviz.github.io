@@ -7,6 +7,7 @@
     <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="libs/queue/queue.min.js"></script>
 
+    <script src="data/NYC_BorosSimple.js"></script>
     <script src="libs/leaflet-0.7.3/leaflet.js"></script>
     <script src="libs/Leaflet.label-master/src/Label.js"></script>
     <script src="libs/Leaflet.label-master/src/BaseMarkerMethods.js"></script>
@@ -40,7 +41,7 @@
 
 <script>
     var info = L.control({position: 'bottomleft'});
-
+    var Interval;
     index = 0;
     //Do map stuff
     //Leaflet Stuff
@@ -58,17 +59,61 @@
     var taxi;
     Lpoints = new L.layerGroup();
     Rpoints = new L.layerGroup();
-    recordPoints = [];
+//    StopPoints = new L.layerGroup();
+//    StartPoints = new L.layerGroup();
 
-    d3.csv("data/taxi_sample1.csv", function(data) {
+
+    d3.csv("data/manhattan_hack.txt", function(data) {
         taxi = data;
-        d3.selectAll('.leaflet-marker-icon').remove()
-        start();
+        d3.selectAll('.leaflet-marker-icon').remove();
+        doTimer(10000, 500,
+                function(e) {
+                    incrementForward = true;
+                    Interval = setInterval(run, 200)
+                },
+                function() {
+//                    display('timer complete');
+                });
     });
 
 
+    function addOverlay(){
+
+        function style(feature) {
+            return {
+                fillColor: 'gray' ,
+                weight:.4,
+                opacity: 1,
+                color: 'black',
+                fillOpacity: 0.8,
+            };
+        }
+
+        //Add the polygon layers
+
+        L.geoJson(boros, {style: style}).addTo(map)
+    }
+//    var previous_point;
     function drawPoint(point){
-        recordPoints.push(point)
+//        if (+point.type == 5){
+//          StartPoints.addLayer(L.circle([+point.latitude, +point.longitude], 100, {
+//              color: 'black',
+//              fillColor: "black",
+//              opacity:.5,
+//              weight: 1,
+//              fillOpacity:.5
+//          }))
+//        } else if (+point.type == 6){
+//            StopPoints.addLayer(L.circle([+previous_point.latitude, +previous_point.longitude], 100, {
+//                color: 'red',
+//                fillColor: "red",
+//                opacity: 1,
+//                weight: 1,
+//                fillOpacity:.5
+//            }))
+//        }
+
+//        console.log(index)
         Lpoints.addLayer(L.circle([+point.latitude, +point.longitude], 100, {
                     color: 'yellow',
                     fillColor: 'yellow',
@@ -79,38 +124,54 @@
         );
 
 
-        Rpoints.addLayer(L.circle([+point.latitude, +point.longitude], 20, {
-                    color: 'purple',
-                    fillColor: 'purple',
-                    fillOpacity: 0.4,
-                    opacity: 0.4
-                })
-        );
+            Rpoints.addLayer(L.circle([+point.latitude, +point.longitude], 20, {
+                        color: 'purple',
+                        fillColor: 'purple',
+                        fillOpacity: 0.4,
+                        opacity: 0.4
+                    })
+            );
 
 
-        map.addLayer(Rpoints);
-        map.addLayer(Lpoints);
+            map.addLayer(Rpoints);
+            map.addLayer(Lpoints);
 
+
+
+//        map.addLayer(StartPoints);
+//        map.addLayer(StopPoints);
+//        previous_point = point;
     }
+
+    var stop;
 
     function run() {
         if (index >= taxi.length-1){
             clearInterval(Interval)
 
         } else {
-            updateDisplay(taxi[index])
+            while (taxi[index].latitude < 30){
+                index += 1;
+                console.log('in while')
+            }
+
+            updateDisplay(taxi[index]);
             Lpoints.clearLayers();
             drawPoint(taxi[index]);
+            if (index == 0){
+                addOverlay();
+            }
             index += 1
         }
+
 
     }
     function removePoints(){}
 
-    function start(){
-        incrementForward = true;
-        Interval = setInterval(run, 100)
-    }
+//    function start(){
+//        incrementForward = true;
+//        Interval = setInterval(run, 3000)
+//    }
 
 
 
@@ -134,7 +195,27 @@
 
     }
 
-    start()
+
+
+
+
+    function doTimer(totalms, interval, oninstance, oncomplete) {
+        var time = 0,
+                start = new Date().getTime();
+
+        function instance() {
+            time += interval;
+            elapsed = Math.floor(time / interval);
+            if (time >= totalms) { oncomplete(); }
+            else {
+                var diff = (new Date().getTime() - start) - time;
+                window.setTimeout(instance, (interval - diff));
+                oninstance(time + diff);
+            }
+        }
+
+        window.setTimeout(instance, interval);
+    }
 </script>
 
 </body>

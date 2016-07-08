@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <!--Libraries-->
+    <script src="libs/d3/d3.min.js" charset="utf-8"></script>
+    <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
+    <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <!--<script src="libs/queue/queue.min.js"></script>-->
+    <script src="libs/sprintf-js/src/sprintf.js"></script>
+
+    <script src="libs/leaflet-0.7.3/leaflet.js"></script>
+    <script src="libs/Leaflet.label-master/src/Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/BaseMarkerMethods.js"></script>
+    <script src="libs/Leaflet.label-master/src/Marker.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/CircleMarker.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/Path.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/Map.Label.js"></script>
+    <script src="libs/Leaflet.label-master/src/FeatureGroup.Label.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy9AdcDTx4VzH_-5g0TaQzJBDZpjHBbpo"></script>
+    <script src="libs/underscore/underscore-min.js"></script>
+
+    <!--Data Loads-->
+
+    <!--Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/leaflet-0.7.3/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="libs/Leaflet.label-master/dist/leaflet.label.css" />
+
+    <title></title>
+
+
+</head>
+<body>
+<div class="col-md-12"> <p>NYC Crashes</p> </div>
+<div class="col-md-6 column" id="sourceMap"></div>
+
+<script>
+    var viz_globals = {};
+
+//    function initialize(plat,plong) {
+//        var fulton = {lat: plat, lng: plong};
+//
+//        var panorama = new google.maps.StreetViewPanorama(
+//                document.getElementById('SView'), {
+//                    position: fulton,
+//                    pov: {
+//                        heading: 34,
+//                        pitch: 10
+//                    }
+//                });
+//    }
+
+    /*
+     Source http://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs
+     */
+    function rad2degr(rad) { return rad * 180 / Math.PI; }
+    function degr2rad(degr) { return degr * Math.PI / 180; }
+    function getLatLngCenter(latLngInDegr) {
+        var LATIDX = 0;
+        var LNGIDX = 1;
+        var sumX = 0;
+        var sumY = 0;
+        var sumZ = 0;
+
+        for (var i=0; i<latLngInDegr.length; i++) {
+            var lat = degr2rad(latLngInDegr[i][LATIDX]);
+            var lng = degr2rad(latLngInDegr[i][LNGIDX]);
+            // sum of cartesian coordinates
+            sumX += Math.cos(lat) * Math.cos(lng);
+            sumY += Math.cos(lat) * Math.sin(lng);
+            sumZ += Math.sin(lat);
+        }
+
+        var avgX = sumX / latLngInDegr.length;
+        var avgY = sumY / latLngInDegr.length;
+        var avgZ = sumZ / latLngInDegr.length;
+
+        // convert average x, y, z coordinate to latitude and longtitude
+        var lng = Math.atan2(avgY, avgX);
+        var hyp = Math.sqrt(avgX * avgX + avgY * avgY);
+        var lat = Math.atan2(avgZ, hyp);
+
+        return ([rad2degr(lat), rad2degr(lng)]);
+    }
+
+    function colorVal(p){
+        var color;
+        if ( p > 0 )  {
+            color = "red"
+
+        } else if ( p < 0) {
+            color = 'steelblue'
+        } else {
+            color = 'black'
+        }
+
+        return color;
+    }
+
+    function sizeVal(val){
+        var size;
+        if (val > 0){
+            size =
+                val >= 10 ? 200:
+                        val > 5 ? 150:
+                                val > 3 ? 100:
+                                        val > 1 ? 50:
+                                                val > .5 ? 25:
+                                                        1
+        } else if (val < 0){
+           size =
+                    val <= -10 ? 200:
+                            val < -5 ? 150:
+                                    val < -3 ? 100:
+                                            val < -1 ? 50:
+                                                    val < -.5 ? 25:
+                                                            1;
+        } else {
+            return 1
+        }
+        return size
+    }
+
+//    function addOverlay(){
+//
+//        function overLayColor(d){
+//            return d == 60 ? "red":
+//                    "black"
+//        }
+//
+//        function onEachFeature(feature, layer) {
+//            var popupContent = "<p>Total Injured/Killed: %s </p> <p>Total Injured: %s </p> <p>Total Killed: %s </p>";
+//            popupContent = vsprintf(popupContent,[feature.properties.total, feature.properties.inj, feature.properties.fat])
+//            layer.bindPopup(popupContent);
+//        }
+//
+//        function style(feature) {
+//            return {
+//                fillColor: overLayColor(feature.properties.dn) ,
+//                weight: 1,
+//                opacity: 1,
+//                color: 'black',
+//                dashArray: '3',
+//                fillOpacity: 0.1
+//            };
+//        }
+
+        //Add the polygon layers
+//        L.geoJson(bar60, {style: style,onEachFeature: onEachFeature}).addTo(map);
+//        L.geoJson(bar30, {style: style,onEachFeature: onEachFeature}).addTo(map);
+//    }
+
+
+
+    d3.csv("sip_data/sip_crash.csv", function(data) {
+        viz_globals.data = data;
+        var coords = [];
+        viz_globals.data.forEach(function(d) {coords.push([d.y, d.x])});
+
+        //Do map stuff
+        //Leaflet Stuff (zoom level, center, north arrow, etc)
+        map = L.map("sourceMap", { zoomControl:true });
+        viz_globals.info = L.control({position: 'bottomleft'});
+        var north = L.control({position: "topleft"});
+        north.onAdd = function(map) {
+            var div = L.DomUtil.create("div", "arrow");
+            div.innerHTML = '<img src="LeafletNorth.png">';
+            return div;
+        };
+        north.addTo(map);
+
+        //Set the zoom based on the coordinates
+        var mapCenter = getLatLngCenter(coords);
+        map.setView(mapCenter, 12);
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            minZoom: 12,
+            id: 'mdowd.n6anai1b',
+            access_token: "pk.eyJ1IjoibWRvd2QiLCJhIjoic0xVV3F6cyJ9.-gW3HHcgm-6qeMajHWz5_A"
+        }).addTo(map);
+        L.control.scale({position:"topleft"}).addTo(map);
+
+        //Add the heat map polygons
+//        addOverlay();
+
+        //onPoint Click show the Street view.
+        function onClick(e){
+            initialize(e.latlng.lat, e.latlng.lng)
+        }
+
+        data.forEach(function (i) {
+                if ( !isNaN(+i.x) ) {
+
+                marker = new L.circle([i.y, i.x], sizeVal(i.pdiff), {
+                    color: colorVal(i.pdiff),
+                    fillColor: colorVal(i.pdiff),
+                    fillOpacity:.4,
+                    stroke: false
+                }).bindLabel(createLabel(i), {
+                            noHide: true,
+                            direction: 'auto'
+                        }).on('click', onClick)
+                        .addTo(map)
+
+                }
+        });
+
+      //  updateDisplay();
+        d3.selectAll('.leaflet-marker-icon').remove()
+    });
+
+    function createLabel(valI){
+        return "Masterid: "+ valI.masterid +"  Sip ID" + valI.sip_id_x + " Before: " + valI.before_crash + '  ||  After: ' + valI.after_crash;
+    }
+
+    function updateDisplay(){
+        $('.info').remove();
+
+        viz_globals.info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+
+        //Control FLow for Labels - sort of a mess but running out of time.
+
+        viz_globals.info.update = function (asset) {
+            var vals = [{name: "More than 75%", color:"yellow"}, {name: "50%-75%", color:"red"}, {name: "25%-50%", color:"blue"}, {name: "Less than 25%", color:"black"} ];
+            var sc1 =  '<svg height="50" width="50"><circle cx="20" cy="20"  stroke= ';
+            var sc2 = ' stroke-width="3" fill=';
+            var sc3 = ' r="7" /></svg>';
+            var htmlContent= '<p>'  + "Utilization Rate" + '</p>' + '<br>';
+            vals.forEach(function(d){
+               htmlContent +=  sc1 + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
+            });
+            this._div.innerHTML = htmlContent;
+        };
+        viz_globals.info.addTo(map);
+
+
+
+    }
+
+</script>
+
+<div class="col-md-6" id="SView">
+
+<p> Click on Crash Point to Display Street View of Location</p>
+
+</div>
+
+</body>
+</html>
