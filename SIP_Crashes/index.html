@@ -40,18 +40,18 @@
 <script>
     var viz_globals = {};
 
-//    function initialize(plat,plong) {
-//        var fulton = {lat: plat, lng: plong};
-//
-//        var panorama = new google.maps.StreetViewPanorama(
-//                document.getElementById('SView'), {
-//                    position: fulton,
-//                    pov: {
-//                        heading: 34,
-//                        pitch: 10
-//                    }
-//                });
-//    }
+    function initialize(plat,plong) {
+        var fulton = {lat: plat, lng: plong};
+
+        var panorama = new google.maps.StreetViewPanorama(
+                document.getElementById('SView'), {
+                    position: fulton,
+                    pov: {
+                        heading: 34,
+                        pitch: 10
+                    }
+                });
+    }
 
     /*
      Source http://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs

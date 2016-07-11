@@ -5,7 +5,7 @@ a.page-scroll {
 }
 
 #sourceMap{
-    width: 1000px;
+    width: 800px;
     height: 800px;
     background-color: #D1D1D1;
 
@@ -28,17 +28,17 @@ a.page-scroll {
     margin-top: 20px;
 }
 
-/*#SView  {*/
-    /*width: 700px;*/
-    /*height: 800px;*/
-    /*background-color: #D1D1D1;*/
-/*}*/
+#SView  {
+    width: 700px;
+    height: 800px;
+    background-color: #D1D1D1;
+}
 
-/*#SView  p{*/
-    /*margin-right: auto;*/
-    /*width: 16em;*/
-    /*font-weight: bold;*/
-/*}*/
+#SView  p{
+    margin-right: auto;
+    width: 16em;
+    font-weight: bold;
+}
 
 #sliderDiv{
     height: 50px;
