@@ -194,7 +194,7 @@
         data.forEach(function (i) {
                 if ( !isNaN(+i.x) ) {
 
-                marker = new L.circle([i.y, i.x], sizeVal(i.pdiff), {
+                marker = new L.circle([i.y, i.x], sizeVal(+i.before_crash - +i.after_crash), {
                     color: colorVal(i.pdiff),
                     fillColor: colorVal(i.pdiff),
                     fillOpacity:.4,
