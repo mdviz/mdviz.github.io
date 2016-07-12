@@ -53,6 +53,17 @@
                 });
     }
 
+    Array.prototype.getUnique = function(){
+        var u = {}, a = [];
+        for(var i = 0, l = this.length; i < l; ++i){
+            if(u.hasOwnProperty(this[i])) {
+                continue;
+            }
+            a.push(this[i]);
+            u[this[i]] = 1;
+        }
+        return a;
+    }
     /*
      Source http://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs
      */
@@ -186,12 +197,34 @@
         //Add the heat map polygons
 //        addOverlay();
 
-        //onPoint Click show the Street view.
-        function onClick(e){
-            initialize(e.latlng.lat, e.latlng.lng)
+        function cleanTreatments(treatments) {
+            var cTreatments = [];
+            treatments = treatments.split(',').getUnique();
+            treatments.forEach(function(d){
+                d = d.replace(/"/g,"");
+                d = d.replace("(","");
+                d = d.replace(")","");
+                cTreatments.push(d)
+
+            });
+            return cTreatments.getUnique();
         }
 
+        //onPoint Click show the Street view.
+        function onClick(e){
+            $('p.treats').remove();
+//            initialize(e.latlng.lat, e.latlng.lng)
+            treatments = cleanTreatments(data[e.target.dataid].combo_treatment);
+            treatments.forEach(function(d, i){
+
+                $('<p>').appendTo('#SView').prop('id', 'num_' + i);
+                $("p#num_"+i).prop('class','treats').text(i+1 + ' - ' + d);
+            })
+        }
+
+        var counter = 0;
         data.forEach(function (i) {
+
                 if ( !isNaN(+i.x) ) {
 
                 marker = new L.circle([i.y, i.x], sizeVal(+i.before_crash - +i.after_crash), {
@@ -206,6 +239,8 @@
                         .addTo(map)
 
                 }
+                marker.dataid =counter;
+                counter += 1
         });
 
       //  updateDisplay();
@@ -248,7 +283,7 @@
 
 <div class="col-md-6" id="SView">
 
-<p> Click on Crash Point to Display Street View of Location</p>
+<p> Click on Point to Display Street Treatments</p>
 
 </div>
 
