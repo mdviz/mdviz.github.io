@@ -12,6 +12,21 @@ a.page-scroll {
 }
 
 
+#sourceMap2{
+    width: 900px;
+    height: 800px;
+    background-color: #D1D1D1;
+
+}
+
+
+#sourceMap3{
+    width: 900px;
+    height: 800px;
+    background-color: #D1D1D1;
+
+}
+
 .info, h4{
     padding:10px;
     color: black;
@@ -33,6 +48,21 @@ a.page-scroll {
     height: 800px;
     background-color: #D1D1D1;
 }
+
+#SView2  {
+    width: 400px;
+    height: 800px;
+    background-color: #D1D1D1;
+}
+
+#SView3  {
+    width: 400px;
+    height: 800px;
+    background-color: #D1D1D1;
+}
+
+
+
 
 #SView  p{
     margin-right: auto;
