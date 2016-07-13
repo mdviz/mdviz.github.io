@@ -3,18 +3,7 @@
  */
 var viz_globals = {};
 
-//    function initialize(plat,plong) {
-//        var fulton = {lat: plat, lng: plong};
-//
-//        var panorama = new google.maps.StreetViewPanorama(
-//                document.getElementById('SView'), {
-//                    position: fulton,
-//                    pov: {
-//                        heading: 34,
-//                        pitch: 10
-//                    }
-//                });
-//    }
+
 
 Array.prototype.getUnique = function(){
     var u = {}, a = [];
@@ -26,7 +15,7 @@ Array.prototype.getUnique = function(){
         u[this[i]] = 1;
     }
     return a;
-}
+};
 /*
  Source http://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs
  */
@@ -144,6 +133,14 @@ d3.csv("sip_data/all_data_july13.csv", function(data) {
         return div;
     };
     north.addTo(map);
+
+    var all_label = L.control({position:"topright"});
+    all_label.onAdd = function(map) {
+        var div = L.DomUtil.create("div",'overlay')
+        div.innerHTML = '<p class="info"> All Crashes </p>';
+        return div
+    };
+    all_label.addTo(map);
 
     //Set the zoom based on the coordinates
     var mapCenter = getLatLngCenter(coords);

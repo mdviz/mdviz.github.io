@@ -5,7 +5,7 @@ a.page-scroll {
 }
 
 #sourceMap{
-    width: 900px;
+    width: 500px;
     height: 800px;
     background-color: #D1D1D1;
 
@@ -13,7 +13,7 @@ a.page-scroll {
 
 
 #sourceMap2{
-    width: 900px;
+    width: 500px;
     height: 800px;
     background-color: #D1D1D1;
 
@@ -21,7 +21,7 @@ a.page-scroll {
 
 
 #sourceMap3{
-    width: 900px;
+    width: 500px;
     height: 800px;
     background-color: #D1D1D1;
 
@@ -44,31 +44,31 @@ a.page-scroll {
 }
 
 #SView  {
-    width: 400px;
-    height: 800px;
+    width: 500px;
+    height: 400px;
     background-color: #D1D1D1;
 }
 
 #SView2  {
-    width: 400px;
-    height: 800px;
+    width: 500px;
+    height: 400px;
     background-color: #D1D1D1;
 }
 
 #SView3  {
-    width: 400px;
-    height: 800px;
+    width: 500px;
+    height: 400px;
     background-color: #D1D1D1;
 }
 
 
 
 
-#SView  p{
-    margin-right: auto;
-    width: 16em;
-    font-weight: bold;
-}
+/*#SView  p{*/
+    /*margin-right: auto;*/
+    /*width: 16em;*/
+    /*font-weight: bold;*/
+/*}*/
 
 #sliderDiv{
     height: 50px;

@@ -76,6 +76,14 @@ d3.csv("sip_data/bike_data_july13.csv", function(data) {
     };
     north.addTo(bike_map);
 
+    var bike_label = L.control({position:"topright"});
+    bike_label.onAdd = function(bike_map) {
+        var div = L.DomUtil.create("div",'overlay')
+        div.innerHTML = '<p class="info"> Bicycle Crashes </p>';
+        return div
+    };
+    bike_label.addTo(bike_map);
+
     //Set the zoom based on the coordinates
     var mapCenter = getLatLngCenter(coords);
     bike_map.setView(mapCenter, 12);

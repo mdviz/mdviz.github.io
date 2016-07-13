@@ -65,6 +65,15 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
     };
     north.addTo(ped_map);
 
+    var ped_label = L.control({position:"topright"});
+    ped_label.onAdd = function(ped_map) {
+        var div = L.DomUtil.create("div",'overlay')
+        div.innerHTML = '<p class="info"> Pedestrian Crashes </p>';
+        return div
+    };
+    ped_label.addTo(ped_map);
+
+
     //Set the zoom based on the coordinates
     var mapCenter = getLatLngCenter(coords);
     ped_map.setView(mapCenter, 12);
