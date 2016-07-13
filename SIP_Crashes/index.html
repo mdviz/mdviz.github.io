@@ -19,7 +19,6 @@
     <script src="libs/Leaflet.label-master/src/FeatureGroup.Label.js"></script>
     <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy9AdcDTx4VzH_-5g0TaQzJBDZpjHBbpo"></script>-->
     <script src="libs/underscore/underscore-min.js"></script>
-
     <!--Data Loads-->
 
 
@@ -30,16 +29,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="libs/Leaflet.label-master/dist/leaflet.label.css" />
 
-    <!--Viz Scripts-->
-    <script src="all_viz.js"></script>
-    <script src="bike_viz.js"></script>
-    <script src="ped_viz.js"></script>
-
     <title></title>
 
 
 </head>
 <body>
+<script src="L.Map.Sync.js"></script>
+
+<!--Viz Scripts-->
+<script src="all_viz.js"></script>
+<script src="bike_viz.js"></script>
+<script src="ped_viz.js"></script>
+
+
+
 <div class="col-md-12"> <p>All Crashes</p> </div>
 <div class="col-md-6 column" id="sourceMap"></div>
 <div class="col-md-6" id="SView">
@@ -59,6 +62,7 @@
 <div class="col-md-6" id="SView3">
     <p> Click on Point to Display Street Treatments</p>
 </div>
+
 
 </body>
 </html>

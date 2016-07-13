@@ -76,6 +76,7 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
     }).addTo(ped_map);
     L.control.scale({position:"topleft"}).addTo(ped_map);
 
+
     //Add the heat ped_map polygons
 //        addOverlay();
 
@@ -128,6 +129,13 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
 
     //  updateDisplay();
     d3.selectAll('.leaflet-marker-icon').remove()
+    bike_map.sync(ped_map);
+    ped_map.sync(bike_map);
+    bike_map.sync(map);
+    map.sync(bike_map);
+    map.sync(ped_map);
+    ped_map.sync(map)
+
 });
 
 function createLabel_ped(valI){
@@ -178,3 +186,4 @@ function updateDisplay(){
 
 
 }
+
