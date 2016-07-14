@@ -5,7 +5,7 @@
  * Created by michaeldowd on 7/13/16.
  */
 var ped_vis_globals = {};
-
+var ped_map;
 
 
 function pedColorVal(p){
@@ -51,7 +51,7 @@ function pedSizeVal(val){
 d3.csv("sip_data/ped_data_july13.csv", function(data) {
     ped_vis_globals.data = data;
     var coords = [];
-    ped_vis_globals.data.forEach(function(d) {coords.push([d.y, d.x])});
+    ped_vis_globals.data.forEach(function(d) {coords.push([d.Y, d.X])});
 
     //Do map stuff
     //Leaflet Stuff (zoom level, center, north arrow, etc)
@@ -67,7 +67,7 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
 
     var ped_label = L.control({position:"topright"});
     ped_label.onAdd = function(ped_map) {
-        var div = L.DomUtil.create("div",'overlay')
+        var div = L.DomUtil.create("div",'overlay');
         div.innerHTML = '<p class="info"> Pedestrian Crashes </p>';
         return div
     };
@@ -78,8 +78,8 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
     var mapCenter = getLatLngCenter(coords);
     ped_map.setView(mapCenter, 12);
     L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        minZoom: 12,
+        maxZoom: 20,
+        minZoom: 10,
         id: 'mdowd.n6anai1b',
         access_token: "pk.eyJ1IjoibWRvd2QiLCJhIjoic0xVV3F6cyJ9.-gW3HHcgm-6qeMajHWz5_A"
     }).addTo(ped_map);
@@ -105,22 +105,31 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
 
     //onPoint Click show the Street view.
     function onClick(e){
-        $('p.treats_ped').remove();
+        $('p.treats').remove();
 //            initialize(e.latlng.lat, e.latlng.lng)
         treatments = cleanTreatments_ped(data[e.target.dataid].combo_treatment);
         treatments.forEach(function(d, i){
 
-            $('<p>').appendTo('#SView3').prop('id', 'num_' + i);
-            $("p#num_"+i).prop('class','treats_ped').text(i+1 + ' - ' + d);
+            if (i < 5){
+                $('<p>').appendTo('#SView').prop('id', 'num_' + i);
+                $("p#num_"+i).prop('class','treats').text(i+1 + ' - ' + d);
+            } else if (i < 10){
+                $('<p>').appendTo('#SView2').prop('id', 'num_' + i);
+                $("p#num_"+i).prop('class','treats').text(i+1 + ' - ' + d);
+            } else {
+                $('<p>').appendTo('#SView3').prop('id', 'num_' + i);
+                $("p#num_"+i).prop('class','treats').text(i+1 + ' - ' + d);
+            }
+
         })
     }
 
     var counter = 0;
     data.forEach(function (i) {
 
-        if ( !isNaN(+i.x) ) {
+        if ( !isNaN(+i.X) ) {
 
-            marker = new L.circle([i.y, i.x], pedSizeVal(i.d_ped_c_score), {
+            marker = new L.circle([i.Y, i.X], pedSizeVal(i.d_ped_c_score), {
                 color: pedColorVal(i.d_ped_c_score),
                 fillColor: pedColorVal(i.d_ped_c_score),
                 fillOpacity:.4,
@@ -150,6 +159,8 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
 function createLabel_ped(valI){
     var first_row =  "Masterid: " +  valI.masterid ;
     var sip_id = "  Sip IDs: " + valI.sip_id;
+    var duration = " Before/After Span: " + valI.short_span + " days ";
+    var sip_complete = "SIP Completion Duration: " + valI.time_diff;
     var fatals = "Fatal - before: " + valI.bc_ped_nof + " after: " + valI.ac_ped_nof;
     var injuries = "Injuries - before: " + valI.bc_ped_noi + " after: " + valI.ac_ped_noi;
     var sevA = 'Sev.A - before: ' + valI.bc_ped_svA + " after: " + valI.ac_ped_svA;
@@ -157,7 +168,7 @@ function createLabel_ped(valI){
     var sevC = 'Sev.C - before: ' + valI.bc_ped_svC + " after: " + valI.ac_ped_svC;
     var sevO = 'Sev.O - before: ' + valI.bc_ped_svO + " after: " + valI.ac_ped_svO;
     var crash_score='Crash Score - before: ' + valI.bc_ped_c_score + " after: " + valI.ac_ped_c_score
-    var fields = [first_row, sip_id,fatals,injuries,sevA,sevB,sevC,sevO,crash_score];
+    var fields = [first_row, sip_id,duration, sip_complete, fatals,injuries,sevA,sevB,sevC,sevO,crash_score];
     var output = ''
     fields.forEach(function(d){
         output += '<p>'

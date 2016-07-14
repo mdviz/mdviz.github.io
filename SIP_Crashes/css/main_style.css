@@ -8,7 +8,9 @@ a.page-scroll {
     width: 500px;
     height: 800px;
     background-color: #D1D1D1;
-
+    border-style: solid;
+    border-color: #002545;
+    border-width: .5px;
 }
 
 
@@ -16,6 +18,9 @@ a.page-scroll {
     width: 500px;
     height: 800px;
     background-color: #D1D1D1;
+    border-style: solid;
+    border-color: #002545;
+    border-width: .5px;
 
 }
 
@@ -24,6 +29,9 @@ a.page-scroll {
     width: 500px;
     height: 800px;
     background-color: #D1D1D1;
+    border-style: solid;
+    border-color: #002545;
+    border-width: .5px;
 
 }
 
@@ -43,23 +51,18 @@ a.page-scroll {
     margin-top: 20px;
 }
 
-#SView  {
+#SView, #SView2, #SView3 {
+    padding: 10px;
     width: 500px;
-    height: 400px;
-    background-color: #D1D1D1;
+    height: 200px;
+    background-color: #383838;
+    color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #1C1C1C;
 }
 
-#SView2  {
-    width: 500px;
-    height: 400px;
-    background-color: #D1D1D1;
-}
 
-#SView3  {
-    width: 500px;
-    height: 400px;
-    background-color: #D1D1D1;
-}
 
 
 
