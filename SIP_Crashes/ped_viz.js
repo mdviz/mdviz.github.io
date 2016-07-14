@@ -159,7 +159,8 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
 function createLabel_ped(valI){
     var first_row =  "Masterid: " +  valI.masterid ;
     var sip_id = "  Sip IDs: " + valI.sip_id;
-    var duration = " Before/After Span: " + valI.short_span + " days ";
+    var start = "SIP Min Start: "+  valI.start.split(' ')[0];
+    var end = " SIP Max End: "+  valI.end.split(' ')[0];    var duration = " Before/After Span: " + valI.short_span + " days ";
     var sip_complete = "SIP Completion Duration: " + valI.time_diff;
     var fatals = "Fatal - before: " + valI.bc_ped_nof + " after: " + valI.ac_ped_nof;
     var injuries = "Injuries - before: " + valI.bc_ped_noi + " after: " + valI.ac_ped_noi;
@@ -168,7 +169,7 @@ function createLabel_ped(valI){
     var sevC = 'Sev.C - before: ' + valI.bc_ped_svC + " after: " + valI.ac_ped_svC;
     var sevO = 'Sev.O - before: ' + valI.bc_ped_svO + " after: " + valI.ac_ped_svO;
     var crash_score='Crash Score - before: ' + valI.bc_ped_c_score + " after: " + valI.ac_ped_c_score
-    var fields = [first_row, sip_id,duration, sip_complete, fatals,injuries,sevA,sevB,sevC,sevO,crash_score];
+    var fields = [first_row, sip_id,start,end, duration, sip_complete, fatals,injuries,sevA,sevB,sevC,sevO,crash_score];
     var output = ''
     fields.forEach(function(d){
         output += '<p>'
