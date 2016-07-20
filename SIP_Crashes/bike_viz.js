@@ -32,29 +32,29 @@ function bikeColorVal(p){
 
     return color;
 }
-
-function bikeSizeVal(val){
-    if (val > 0){
-        size =
-            val >= 50 ? 200:
-                val > 40 ? 150:
-                    val > 20 ? 125:
-                        val > 10 ? 100:
-                            val > 1 ? 25:
-                                1
-    } else if (val < 0){
-        size =
-            val <= -50 ? 200:
-                val < -40 ? 150:
-                    val < -20 ? 125:
-                        val < -10 ? 100:
-                            val < -1 ? 25:
-                                1;
-    } else {
-        return 1
-    }
-    return size
-}
+//
+//function bikeSizeVal(val){
+//    if (val > 0){
+//        size =
+//            val >= 50 ? 200:
+//                val > 40 ? 150:
+//                    val > 20 ? 125:
+//                        val > 10 ? 100:
+//                            val > 1 ? 25:
+//                                1
+//    } else if (val < 0){
+//        size =
+//            val <= -50 ? 200:
+//                val < -40 ? 150:
+//                    val < -20 ? 125:
+//                        val < -10 ? 100:
+//                            val < -1 ? 25:
+//                                1;
+//    } else {
+//        return 1
+//    }
+//    return size
+//}
 
 
 
@@ -115,7 +115,7 @@ d3.csv("sip_data/bike_data_july13.csv", function(data) {
     //onPoint Click show the Street view.
     function onClick(e){
         $('p.treats').remove();
-//            initialize(e.latlng.lat, e.latlng.lng)
+        initialize(e.latlng.lat, e.latlng.lng)
         treatments = cleanTreatments_bike(data[e.target.dataid].combo_treatment);
         treatments.forEach(function(d, i){
 
@@ -138,7 +138,7 @@ d3.csv("sip_data/bike_data_july13.csv", function(data) {
 
         if ( !isNaN(+i.X) ) {
 
-            marker = new L.circle([i.Y, i.X], bikeSizeVal(i.d_bk_c_score), {
+            marker = new L.circle([i.Y, i.X], sizeVal(i.d_bk_c_score), {
                 color: bikeColorVal(i.d_bk_c_score),
                 fillColor: bikeColorVal(i.d_bk_c_score),
                 fillOpacity:.4,
@@ -161,7 +161,7 @@ d3.csv("sip_data/bike_data_july13.csv", function(data) {
 function createLabel_bike(valI){
     var first_row =  "Masterid: " +  valI.masterid ;
     var sip_id = "  Sip IDs: " + valI.sip_id;
-    var duration = " Before/After Span: " + valI.short_span + " days ";
+    var duration = " Before/After Span: " +( valI.short_span/365).toFixed(1) + " years ";
     var sip_complete = "SIP Completion Duration: " + valI.time_diff;
     var start = "SIP Min Start: "+  valI.start.split(' ')[0];
     var end = " SIP Max End: "+  valI.end.split(' ')[0];
@@ -182,32 +182,32 @@ function createLabel_bike(valI){
     return output
 
 }
-
-
-function updateDisplay(){
-    $('.info').remove();
-
-    bike_vis_globals.info.onAdd = function (bike_map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-    };
-
-    //Control FLow for Labels - sort of a mess but running out of time.
-
-    bike_vis_globals.info.update = function (asset) {
-        var vals = [{name: "More than 75%", color:"yellow"}, {name: "50%-75%", color:"red"}, {name: "25%-50%", color:"blue"}, {name: "Less than 25%", color:"black"} ];
-        var sc1 =  '<svg height="50" width="50"><circle cx="20" cy="20"  stroke= ';
-        var sc2 = ' stroke-width="3" fill=';
-        var sc3 = ' r="7" /></svg>';
-        var htmlContent= '<p>'  + "Utilization Rate" + '</p>' + '<br>';
-        vals.forEach(function(d){
-            htmlContent +=  sc1 + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
-        });
-        this._div.innerHTML = htmlContent;
-    };
-    bike_vis_globals.info.addTo(bike_map);
-
-
-
-}
+//
+//
+//function updateDisplay(){
+//    $('.info').remove();
+//
+//    bike_vis_globals.info.onAdd = function (bike_map) {
+//        this._div = L.DomUtil.create('div', 'info');
+//        this.update();
+//        return this._div;
+//    };
+//
+//    //Control FLow for Labels - sort of a mess but running out of time.
+//
+//    bike_vis_globals.info.update = function (asset) {
+//        var vals = [{name: "More than 75%", color:"yellow"}, {name: "50%-75%", color:"red"}, {name: "25%-50%", color:"blue"}, {name: "Less than 25%", color:"black"} ];
+//        var sc1 =  '<svg height="50" width="50"><circle cx="20" cy="20"  stroke= ';
+//        var sc2 = ' stroke-width="3" fill=';
+//        var sc3 = ' r="7" /></svg>';
+//        var htmlContent= '<p>'  + "Utilization Rate" + '</p>' + '<br>';
+//        vals.forEach(function(d){
+//            htmlContent +=  sc1 + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
+//        });
+//        this._div.innerHTML = htmlContent;
+//    };
+//    bike_vis_globals.info.addTo(bike_map);
+//
+//
+//
+//}

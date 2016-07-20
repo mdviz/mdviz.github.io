@@ -66,17 +66,17 @@ function colorVal(p){
 function sizeVal(val){
     if (val > 0){
         size =
-            val >= 50 ? 200:
-                val > 40 ? 150:
-                    val > 20 ? 125:
+            val >= 50 ? 300:
+                val > 40 ? 200:
+                    val > 20 ? 150:
                         val > 10 ? 100:
                             val > 1 ? 25:
                                 1
     } else if (val < 0){
         size =
-            val <= -50 ? 200:
-                val < -40 ? 150:
-                    val < -20 ? 125:
+            val <= -50 ? 300:
+                val < -40 ? 200:
+                    val < -20 ? 150:
                         val < -10 ? 100:
                             val < -1 ? 25:
                                 1;
@@ -117,6 +117,7 @@ function sizeVal(val){
 
 
 
+
 d3.csv("sip_data/all_data_july13.csv", function(data) {
     viz_globals.data = data;
     var coords = [];
@@ -125,7 +126,7 @@ d3.csv("sip_data/all_data_july13.csv", function(data) {
     //Do map stuff
     //Leaflet Stuff (zoom level, center, north arrow, etc)
     map = L.map("sourceMap", { zoomControl:true });
-    viz_globals.info = L.control({position: 'bottomleft'});
+    viz_globals.info = L.control({position: 'bottomright'});
     var north = L.control({position: "topleft"});
     north.onAdd = function(map) {
         var div = L.DomUtil.create("div", "arrow");
@@ -156,6 +157,8 @@ d3.csv("sip_data/all_data_july13.csv", function(data) {
     //Add the heat map polygons
 //        addOverlay();
 
+
+
     function cleanTreatments_all(treatments) {
         console.log(treatments)
         var cTreatments = [];
@@ -173,7 +176,7 @@ d3.csv("sip_data/all_data_july13.csv", function(data) {
     //onPoint Click show the Street view.
     function onClick(e){
         $('p.treats').remove();
-//            initialize(e.latlng.lat, e.latlng.lng)
+        initialize(e.latlng.lat, e.latlng.lng)
         treatments = cleanTreatments_all(data[e.target.dataid].combo_treatment);
         treatments.forEach(function(d, i){
 
@@ -212,7 +215,6 @@ d3.csv("sip_data/all_data_july13.csv", function(data) {
         counter += 1
     });
 
-    //  updateDisplay();
     d3.selectAll('.leaflet-marker-icon').remove()
 });
 
@@ -220,7 +222,8 @@ function createLabel_all(valI){
     var first_row =  "Masterid: " +  valI.masterid ;
     var sip_id = "  Sip IDs: " + valI.sip_id;
     var start = "SIP Min Start: "+  valI.start.split(' ')[0];
-    var end = " SIP Max End: "+  valI.end.split(' ')[0];    var duration = " Before/After Span: " + valI.short_span + " days ";
+    var end = " SIP Max End: "+  valI.end.split(' ')[0];    var duration = " Before/After Span: " +(valI.short_span/365).toFixed(1)
+        + " years ";
     var sip_complete = "SIP Completion Duration: " + valI.time_diff;
     var fatals = "Fatal - before: " + valI.bc_all_nof + " after: " + valI.ac_all_nof;
     var injuries = "Injuries - before: " + valI.bc_all_noi + " after: " + valI.ac_all_noi;
@@ -241,30 +244,16 @@ function createLabel_all(valI){
 }
 
 
-function updateDisplay(){
-    $('.info').remove();
 
-    viz_globals.info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-    };
+function initialize(plat,plong) {
+    var fulton = {lat: plat, lng: plong};
 
-    //Control FLow for Labels - sort of a mess but running out of time.
-
-    viz_globals.info.update = function (asset) {
-        var vals = [{name: "More than 75%", color:"yellow"}, {name: "50%-75%", color:"red"}, {name: "25%-50%", color:"blue"}, {name: "Less than 25%", color:"black"} ];
-        var sc1 =  '<svg height="50" width="50"><circle cx="20" cy="20"  stroke= ';
-        var sc2 = ' stroke-width="3" fill=';
-        var sc3 = ' r="7" /></svg>';
-        var htmlContent= '<p>'  + "Utilization Rate" + '</p>' + '<br>';
-        vals.forEach(function(d){
-            htmlContent +=  sc1 + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
+    var panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('StreetView'), {
+            position: fulton,
+            pov: {
+                heading: 34,
+                pitch: 10
+            }
         });
-        this._div.innerHTML = htmlContent;
-    };
-    viz_globals.info.addTo(map);
-
-
-
 }

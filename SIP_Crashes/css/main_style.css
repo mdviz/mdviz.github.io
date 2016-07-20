@@ -35,7 +35,7 @@ a.page-scroll {
 
 }
 
-.info, h4{
+.info, .info_main, h4{
     padding:10px;
     color: black;
     font: 16px/14px "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -44,6 +44,12 @@ a.page-scroll {
     border-radius: 2px;
     font-weight: bold;
 }
+
+/*.info_main {*/
+    /*width: 200px;*/
+/*}*/
+
+
 
 .info p {
     position:relative;
@@ -109,4 +115,11 @@ input {
 
 .treats {
     font-weight: 200!important;
+}
+
+#StreetView {
+    width: 1500px;
+    height: 800px;
+    background-color: black;
+    margin-bottom: 40px;
 }

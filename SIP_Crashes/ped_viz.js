@@ -21,29 +21,29 @@ function pedColorVal(p){
 
     return color;
 }
-
-function pedSizeVal(val){
-    if (val > 0){
-        size =
-            val >= 50 ? 200:
-                val > 40 ? 150:
-                    val > 20 ? 125:
-                        val > 10 ? 100:
-                            val > 1 ? 25:
-                                1
-    } else if (val < 0){
-        size =
-            val <= -50 ? 200:
-                val < -40 ? 150:
-                    val < -20 ? 125:
-                        val < -10 ? 100:
-                            val < -1 ? 25:
-                                1;
-    } else {
-        return 1
-    }
-    return size
-}
+//
+//function pedSizeVal(val){
+//    if (val > 0){
+//        size =
+//            val >= 50 ? 200:
+//                val > 40 ? 150:
+//                    val > 20 ? 125:
+//                        val > 10 ? 100:
+//                            val > 1 ? 25:
+//                                1
+//    } else if (val < 0){
+//        size =
+//            val <= -50 ? 200:
+//                val < -40 ? 150:
+//                    val < -20 ? 125:
+//                        val < -10 ? 100:
+//                            val < -1 ? 25:
+//                                1;
+//    } else {
+//        return 1
+//    }
+//    return size
+//}
 
 
 
@@ -106,7 +106,7 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
     //onPoint Click show the Street view.
     function onClick(e){
         $('p.treats').remove();
-//            initialize(e.latlng.lat, e.latlng.lng)
+        initialize(e.latlng.lat, e.latlng.lng)
         treatments = cleanTreatments_ped(data[e.target.dataid].combo_treatment);
         treatments.forEach(function(d, i){
 
@@ -129,7 +129,7 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
 
         if ( !isNaN(+i.X) ) {
 
-            marker = new L.circle([i.Y, i.X], pedSizeVal(i.d_ped_c_score), {
+            marker = new L.circle([i.Y, i.X], sizeVal(i.d_ped_c_score), {
                 color: pedColorVal(i.d_ped_c_score),
                 fillColor: pedColorVal(i.d_ped_c_score),
                 fillOpacity:.4,
@@ -145,7 +145,7 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
         counter += 1
     });
 
-    //  updateDisplay();
+    updateDisplay(ped_map);
     d3.selectAll('.leaflet-marker-icon').remove()
     bike_map.sync(ped_map);
     ped_map.sync(bike_map);
@@ -160,7 +160,8 @@ function createLabel_ped(valI){
     var first_row =  "Masterid: " +  valI.masterid ;
     var sip_id = "  Sip IDs: " + valI.sip_id;
     var start = "SIP Min Start: "+  valI.start.split(' ')[0];
-    var end = " SIP Max End: "+  valI.end.split(' ')[0];    var duration = " Before/After Span: " + valI.short_span + " days ";
+    var end = " SIP Max End: "+  valI.end.split(' ')[0];    var duration = " Before/After Span: " +(valI.short_span/365).toFixed(1)
+        + " years ";
     var sip_complete = "SIP Completion Duration: " + valI.time_diff;
     var fatals = "Fatal - before: " + valI.bc_ped_nof + " after: " + valI.ac_ped_nof;
     var injuries = "Injuries - before: " + valI.bc_ped_noi + " after: " + valI.ac_ped_noi;
@@ -180,31 +181,46 @@ function createLabel_ped(valI){
 }
 
 
-function updateDisplay(){
-    $('.info').remove();
+function updateDisplay(ped_map){
+    //$('.info').remove();
 
-    ped_vis_globals.info.onAdd = function (ped_map) {
-        this._div = L.DomUtil.create('div', 'info');
+
+    viz_globals.info.onAdd = function (ped_map) {
+        this._div = L.DomUtil.create('div', 'info_main');
         this.update();
         return this._div;
     };
 
     //Control FLow for Labels - sort of a mess but running out of time.
 
-    ped_vis_globals.info.update = function (asset) {
-        var vals = [{name: "More than 75%", color:"yellow"}, {name: "50%-75%", color:"red"}, {name: "25%-50%", color:"blue"}, {name: "Less than 25%", color:"black"} ];
-        var sc1 =  '<svg height="50" width="50"><circle cx="20" cy="20"  stroke= ';
+    viz_globals.info.update = function (asset) {
+        
+        wh = "50"
+
+        var sz1 =  '<svg height="50" width="50"><circle cx="20" cy="20" r="30" stroke= ';
+        var sz2 =  '<svg height="50" width="50"><circle cx="20" cy="20" r="20" stroke= ';
+        var sz3 =  '<svg height="50" width="50"><circle cx="20" cy="20" r="15"  stroke= ';
+        var sz4 =  '<svg height="50" width="50"><circle cx="20" cy="20" r="5" stroke= ';
+        var sz5 =  '<svg height="50" width="50"><circle cx="20" cy="20" r="1" stroke= ';
+
+        var vals = [{name: "+/- 50", color:"gray", size:sz1},
+                    {name: "+/- 40", color:"gray", size:sz2},
+                    {name: "+/- 20", color:"gray", size:sz3},
+                    {name: "+/- 10", color:"gray", size:sz4} ,
+                    {name: "+/- 1", color:"gray",size:sz5}
+        ];
         var sc2 = ' stroke-width="3" fill=';
-        var sc3 = ' r="7" /></svg>';
-        var htmlContent= '<p>'  + "Utilization Rate" + '</p>' + '<br>';
+        var sc3 = ' /></svg>';
+
+        var htmlContent= '<p style="color:steelblue;">'  + "Blue = Decrease" + '</p>' + '<br>';
+
+        htmlContent +=  '<p style="color:red";>'  + "Red = Increase" + '</p>' + '<br>';
         vals.forEach(function(d){
-            htmlContent +=  sc1 + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
+            htmlContent += d.size + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
         });
         this._div.innerHTML = htmlContent;
     };
-    ped_vis_globals.info.addTo(ped_map);
-
+    viz_globals.info.addTo(ped_map);
 
 
 }
-
