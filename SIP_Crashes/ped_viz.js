@@ -4,8 +4,7 @@
 /**
  * Created by michaeldowd on 7/13/16.
  */
-var ped_vis_globals = {};
-var ped_map;
+var ped_vis_globals = {ped_markers : new L.FeatureGroup()};
 
 
 function pedColorVal(p){
@@ -21,32 +20,6 @@ function pedColorVal(p){
 
     return color;
 }
-//
-//function pedSizeVal(val){
-//    if (val > 0){
-//        size =
-//            val >= 50 ? 200:
-//                val > 40 ? 150:
-//                    val > 20 ? 125:
-//                        val > 10 ? 100:
-//                            val > 1 ? 25:
-//                                1
-//    } else if (val < 0){
-//        size =
-//            val <= -50 ? 200:
-//                val < -40 ? 150:
-//                    val < -20 ? 125:
-//                        val < -10 ? 100:
-//                            val < -1 ? 25:
-//                                1;
-//    } else {
-//        return 1
-//    }
-//    return size
-//}
-
-
-
 
 d3.csv("sip_data/ped_data_july13.csv", function(data) {
     ped_vis_globals.data = data;
@@ -55,38 +28,38 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
 
     //Do map stuff
     //Leaflet Stuff (zoom level, center, north arrow, etc)
-    ped_map = L.map("sourceMap3", { zoomControl:true });
+    viz_globals.ped_map = L.map("sourceMap3", { zoomControl:true });
     ped_vis_globals.info = L.control({position: 'bottomleft'});
     var north = L.control({position: "topleft"});
-    north.onAdd = function(ped_map) {
+    north.onAdd = function(map) {
         var div = L.DomUtil.create("div", "arrow");
         div.innerHTML = '<img src="LeafletNorth.png">';
         return div;
     };
-    north.addTo(ped_map);
+    north.addTo(viz_globals.ped_map);
 
     var ped_label = L.control({position:"topright"});
-    ped_label.onAdd = function(ped_map) {
+    ped_label.onAdd = function(map) {
         var div = L.DomUtil.create("div",'overlay');
         div.innerHTML = '<p class="info"> Pedestrian Crashes </p>';
         return div
     };
-    ped_label.addTo(ped_map);
+    ped_label.addTo(viz_globals.ped_map);
 
 
     //Set the zoom based on the coordinates
     var mapCenter = getLatLngCenter(coords);
-    ped_map.setView(mapCenter, 12);
+    viz_globals.ped_map.setView(mapCenter, 12);
     L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
         maxZoom: 20,
         minZoom: 10,
         id: 'mdowd.n6anai1b',
         access_token: "pk.eyJ1IjoibWRvd2QiLCJhIjoic0xVV3F6cyJ9.-gW3HHcgm-6qeMajHWz5_A"
-    }).addTo(ped_map);
-    L.control.scale({position:"topleft"}).addTo(ped_map);
+    }).addTo(viz_globals.ped_map);
+    L.control.scale({position:"topleft"}).addTo(viz_globals.ped_map);
 
 
-    //Add the heat ped_map polygons
+    //Add the heat viz_globals.ped_map polygons
 //        addOverlay();
 
     function cleanTreatments_ped(treatments) {
@@ -122,37 +95,44 @@ d3.csv("sip_data/ped_data_july13.csv", function(data) {
             }
 
         })
+
     }
 
     var counter = 0;
-    data.forEach(function (i) {
 
-        if ( !isNaN(+i.X) ) {
+    ped_vis_globals.create_markers = function(col_value){
+        data.forEach(function (i) {
 
-            marker = new L.circle([i.Y, i.X], sizeVal(i.d_ped_c_score), {
-                color: pedColorVal(i.d_ped_c_score),
-                fillColor: pedColorVal(i.d_ped_c_score),
-                fillOpacity:.4,
-                stroke: false
-            }).bindLabel(createLabel_ped(i), {
-                noHide: true,
-                direction: 'auto'
-            }).on('click', onClick)
-                .addTo(ped_map)
+            if ( !isNaN(+i.X) ) {
 
-        }
-        marker.dataid =counter;
-        counter += 1
-    });
+                marker = new L.circle([i.Y, i.X], sizeVal(i[col_value]), {
+                    color: pedColorVal(i[col_value]),
+                    fillColor: pedColorVal(i[col_value]),
+                    fillOpacity:.4,
+                    stroke: false
+                }).bindLabel(createLabel_ped(i), {
+                    noHide: true,
+                    direction: 'auto'
+                }).on('click', onClick)
 
-    updateDisplay(ped_map);
-    d3.selectAll('.leaflet-marker-icon').remove()
-    bike_map.sync(ped_map);
-    ped_map.sync(bike_map);
-    bike_map.sync(map);
-    map.sync(bike_map);
-    map.sync(ped_map);
-    ped_map.sync(map)
+                ped_vis_globals.ped_markers.addLayer(marker)
+
+            }
+            marker.dataid =counter;
+            counter += 1
+        });
+        viz_globals.ped_map.addLayer(ped_vis_globals.ped_markers);
+    };
+
+    ped_vis_globals.remove_markers = function() {
+        viz_globals.ped_map.removeLayer(ped_vis_globals.ped_markers)
+    };
+
+
+    ped_vis_globals.create_markers('d_ped_c_score');
+    updateDisplay(viz_globals.ped_map);
+    d3.selectAll('.leaflet-marker-icon').remove();
+
 
 });
 
@@ -181,11 +161,11 @@ function createLabel_ped(valI){
 }
 
 
-function updateDisplay(ped_map){
+function updateDisplay(map){
     //$('.info').remove();
 
 
-    viz_globals.info.onAdd = function (ped_map) {
+    viz_globals.info.onAdd = function (map) {
         this._div = L.DomUtil.create('div', 'info_main');
         this.update();
         return this._div;
@@ -219,8 +199,10 @@ function updateDisplay(ped_map){
             htmlContent += d.size + d.color + sc2 + d.color + sc3 +  '<span style=vertical-align:20px; ">' + d.name + '</span>' + " <br>"
         });
         this._div.innerHTML = htmlContent;
+
+
     };
-    viz_globals.info.addTo(ped_map);
+    viz_globals.info.addTo(viz_globals.ped_map);
 
 
 }

@@ -2,7 +2,6 @@
  * Created by michaeldowd on 7/13/16.
  */
 var viz_globals = {};
-var map;
 
 
 Array.prototype.getUnique = function(){
@@ -86,38 +85,6 @@ function sizeVal(val){
     return size
 }
 
-//    function addOverlay(){
-//
-//        function overLayColor(d){
-//            return d == 60 ? "red":
-//                    "black"
-//        }
-//
-//        function onEachFeature(feature, layer) {
-//            var popupContent = "<p>Total Injured/Killed: %s </p> <p>Total Injured: %s </p> <p>Total Killed: %s </p>";
-//            popupContent = vsprintf(popupContent,[feature.properties.total, feature.properties.inj, feature.properties.fat])
-//            layer.bindPopup(popupContent);
-//        }
-//
-//        function style(feature) {
-//            return {
-//                fillColor: overLayColor(feature.properties.dn) ,
-//                weight: 1,
-//                opacity: 1,
-//                color: 'black',
-//                dashArray: '3',
-//                fillOpacity: 0.1
-//            };
-//        }
-
-//Add the polygon layers
-//        L.geoJson(bar60, {style: style,onEachFeature: onEachFeature}).addTo(map);
-//        L.geoJson(bar30, {style: style,onEachFeature: onEachFeature}).addTo(map);
-//    }
-
-
-
-
 d3.csv("sip_data/all_data_july13.csv", function(data) {
     viz_globals.data = data;
     var coords = [];
@@ -125,7 +92,7 @@ d3.csv("sip_data/all_data_july13.csv", function(data) {
 
     //Do map stuff
     //Leaflet Stuff (zoom level, center, north arrow, etc)
-    map = L.map("sourceMap", { zoomControl:true });
+    viz_globals.all_map = L.map("sourceMap", { zoomControl:true });
     viz_globals.info = L.control({position: 'bottomright'});
     var north = L.control({position: "topleft"});
     north.onAdd = function(map) {
@@ -133,7 +100,7 @@ d3.csv("sip_data/all_data_july13.csv", function(data) {
         div.innerHTML = '<img src="LeafletNorth.png">';
         return div;
     };
-    north.addTo(map);
+    north.addTo(viz_globals.all_map);
 
     var all_label = L.control({position:"topright"});
     all_label.onAdd = function(map) {
@@ -141,18 +108,18 @@ d3.csv("sip_data/all_data_july13.csv", function(data) {
         div.innerHTML = '<p class="info"> All Crashes </p>';
         return div
     };
-    all_label.addTo(map);
+    all_label.addTo(viz_globals.all_map);
 
     //Set the zoom based on the coordinates
     var mapCenter = getLatLngCenter(coords);
-    map.setView(mapCenter, 12);
+    viz_globals.all_map.setView(mapCenter, 12);
     L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
         maxZoom: 20,
         minZoom: 10,
         id: 'mdowd.n6anai1b',
         access_token: "pk.eyJ1IjoibWRvd2QiLCJhIjoic0xVV3F6cyJ9.-gW3HHcgm-6qeMajHWz5_A"
-    }).addTo(map);
-    L.control.scale({position:"topleft"}).addTo(map);
+    }).addTo(viz_globals.all_map);
+    L.control.scale({position:"topleft"}).addTo(viz_globals.all_map);
 
     //Add the heat map polygons
 //        addOverlay();
@@ -208,7 +175,7 @@ d3.csv("sip_data/all_data_july13.csv", function(data) {
                 noHide: true,
                 direction: 'auto'
             }).on('click', onClick)
-                .addTo(map)
+                .addTo(viz_globals.all_map)
 
         }
         marker.dataid =counter;
