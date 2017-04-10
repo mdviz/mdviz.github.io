@@ -127,8 +127,8 @@ d3.tsv("data/PtOnOff.csv", function(data){
         StreetMapGlobals.rootNodes[d.A].Total += +d.DiffB4ft;
     });
 });
-
 StreetMapVis = function(){
+
     this.initVis();
     this.LinesAtStop();
 

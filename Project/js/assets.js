@@ -179,7 +179,7 @@ AssetMapVis.prototype.wrangleDemData = function(dim, label, level) {
     this.classMap = d3.map();
     var newlabel = label === "TAZAREA" ? "TAZAR" : label;
 
-    console.log(label, "LABEL")
+    console.log(label, "LABEL");
     Demographics[label.toLowerCase()].forEach(function (d) {
         that.classMap.set(d.TAZ, d[newlabel.toUpperCase() + "_" + 6 + "ft"])
     });
