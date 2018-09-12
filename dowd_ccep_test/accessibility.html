@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+  <title>CCEP | Vote Center Siting Tool</title>
+  
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+        integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+        crossorigin=""/>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/header.css" />
+</head>
+
+<body>
+
+
+<div class="navbar navbar-default">
+  <!-- TODO: Understand why the other page is getting a top line margin
+             and this page is not -->
+  <div class="col-lg-12 col-sm-12" style="margin-top: 20px;">
+    
+    <a href="http://ccep.ucdavis.edu/">
+      <img class="header-logo"  src="assets/ccep_logo.png" alt="California Civic Engagement Project (CCEP)">
+    </a>
+      <!-- <img class="header-logo"  src="assets/ccep_logo.png" alt="California Civic Engagement Project (CCEP)"> -->
+
+      <button class="btn btn-primary pull-right hidden-xs ccephome"
+            onclick="window.open('index.html','_self')"
+            style="margin-top: 10px;">
+      <span class="glyphicon glyphicon-home "></span>
+    </button>
+
+  </div>
+</div>
+
+<div class="row clearfix" style="width: 100%; overflow-x: hidden;">
+  
+      <div id="content-wrapper" class="col-lg-12 col-md-12 col-sm-12" style="padding-right: 60px">
+
+      <br>
+      <div class="methodology_text">
+
+        <h1> Usability Resources</h1>
+        <br>
+        <h3>Google Chrome</h3>
+        <ul class='makedashed'>
+          <li class="accessItem">
+            <b>Increase PC Text Size: </b>
+            To increase the size of text and other items on a page, press 
+            <span class="kbdkeys"><kbd>Ctrl</kbd></span> and <span class="kbdkeys"><kbd>+</kbd></span>
+            to zoom in, and 
+            <span class="kbdkeys"><kbd>Ctrl</kbd></span> and <span class="kbdkeys"> <kbd>-</kbd></span>
+            to zoom out.
+          </li>
+          <li class="accessItem">
+            <b>Increase Mac Text Size: </b>
+            To increase the size of text and other items on a page, press 
+            <span class="kbdkeys"><kbd>Command</kbd></span> and <span class="kbdkeys"><kbd>+</kbd></span>
+            to zoom in, and 
+            <span class="kbdkeys"><kbd>Command</kbd></span> and <span class="kbdkeys"> <kbd>-</kbd></span>
+            to zoom out.
+          </li>
+        </ul>
+
+        <h4>Useful Extenstions </h4>
+        <ul class='makedashed'>
+          <li class="accessItem">
+            <b><a href="https://chrome.google.com/webstore/detail/zoom-text-only/jamhfhbppcmkgghlkeieococonlbppjg?hl=en-US">Zoom Text Only</a></b>:
+            Extension for zooming text without changing the size of images on a page.
+          </li>
+          <li class="accessItem">
+            <b><a href="https://chrome.google.com/webstore/detail/dyslexia-reader-chrome/npfbahgomodenajejiopcfbggcpkcani?hl=en-US">Dyslexia Reader Chrome</a></b>:
+            Extension that makes text easier to read.
+          </li>
+          <li class="accessItem">
+            <b><a href="https://chrome.google.com/webstore/detail/care-your-eyes/fidmpnedniahpnkeomejhnepmbdamlhl?hl=en">Care Your Eyes</a></b>:
+            Extension that changes a webpage's background color to either reseda or night mode, to protect your eyes from harsh white or other light colors.
+          </li>
+        
+        </ul>
+
+
+        <br>
+        <h3>Firefox</h3>
+        <ul class='makedashed'>
+          <li class="accessItem">
+            <b>Increase PC Text Size: </b>
+            To increase the size of text and other items on a page, press 
+            <span class="kbdkeys"><kbd>Ctrl</kbd></span> and <span class="kbdkeys"><kbd>+</kbd></span>
+            to zoom in, and 
+            <span class="kbdkeys"><kbd>Ctrl</kbd></span> and <span class="kbdkeys"> <kbd>-</kbd></span>
+            to zoom out.
+          </li>
+          <li class="accessItem">
+            <b>Increase Mac Text Size: </b>
+            To increase the size of text and other items on a page, press 
+            <span class="kbdkeys"><kbd>Command</kbd></span> and <span class="kbdkeys"><kbd>+</kbd></span>
+            to zoom in, and 
+            <span class="kbdkeys"><kbd>Command</kbd></span> and <span class="kbdkeys"> <kbd>-</kbd></span>
+            to zoom out.
+          </li>
+              <li class="accessItem">
+            <b>
+              <a href="https://support.mozilla.org/en-US/kb/accessibility-features-firefox-make-firefox-and-we"> Additional Resources </a> 
+            </b>
+          </li>
+
+        </ul>
+
+        <h4>Useful Extenstions </h4>
+        <ul class='makedashed'>
+          <li class="accessItem">
+            <b><a href="https://addons.mozilla.org/en-US/firefox/addon/mobile-dyslexic/">Mobile Dyslexic</a></b>:
+            Extension that replaces web page fonts with a font that is easier to read by people with dyslexia.
+          </li>
+      
+        </ul>
+
+        <br>
+        <h3>Internet Explorer</h3>
+
+        <ul class='makedashed'>
+          <li class="accessItem">
+            <b>Increase Text Size: </b>
+            To increase the size of text and other items on a page, press 
+            <span class="kbdkeys"><kbd>Ctrl</kbd></span> and <span class="kbdkeys"><kbd>+</kbd></span>
+            to zoom in, and 
+            <span class="kbdkeys"><kbd>Ctrl</kbd></span> and <span class="kbdkeys"> <kbd>-</kbd></span>
+            to zoom out.
+          </li>
+          <li class="accessItem">
+            <b>Zoom Tool: </b> Open Internet Explorer, select the <b><i>Tools</b></i> button  and then select <b><i>Zoom</i></b>.
+                Select a zoom level option, or select a custom level by selecting Custom and entering a zoom value.
+          </li>
+          <li class="accessItem">
+            <b>
+              <a href="https://support.microsoft.com/en-us/help/17456/windows-internet-explorer-ease-of-access-options"> Additional Resources </a> 
+            </b>
+          </li>
+        </ul>
+
+        <br>
+        <h3>Safari</h3>
+        <ul class='makedashed'>
+          <li class="accessItem">
+            <b>Increase Mac Text Size: </b>
+            To increase the size of text and other items on a page, press 
+            <span class="kbdkeys"><kbd>Command</kbd></span> and <span class="kbdkeys"><kbd>+</kbd></span>
+            to zoom in, and 
+            <span class="kbdkeys"><kbd>Command</kbd></span> and <span class="kbdkeys"> <kbd>-</kbd></span>
+            to zoom out.
+          </li>
+          </li>
+              <li class="accessItem">
+            <b>
+              <a href="https://mediaaccess.org.au/web/web-browsers/how-to-turn-on-accessibility-features-in-safari"> Additional Resources </a> 
+            </b>
+          </li>
+        </ul>
+              
+      </div>
+      <br>      
+      <br>
+
+    </div>
+
+
+
+</div>
+
+<div class="footer" id='methodfoot'>
+  <center>
+    <span onclick="goBack()" style="cursor:pointer;"> Previous Page</span> 
+
+            <span class="glyphicon glyphicon-chevron-right"></span> 
+
+        <a href="methodology.html">
+      More Information on the Siting Tool
+    </a>
+        <span class="glyphicon glyphicon-chevron-right"></span> 
+
+        <a href="acknowledgments.html">
+      Acknowledgments
+    </a>
+        <span class="glyphicon glyphicon-chevron-right"></span> 
+
+        <a href="contact.html">
+      Contact
+    </a>
+
+    
+    
+  </center>
+</div>
+
+<!-- Global variables -->
+<!-- TODO: Why is this being included on this page? -->
+<script src="data/california_counties.js"></script>
+
+<!-- Libraries needed -->
+<script src="js/jquery.min.js"
+        type="text/javascript"></script>
+
+<!-- Leaflet related -->
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+        integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+        crossorigin=""></script>
+
+
+
+<script type="text/javascript">
+
+  function goBack(){
+    window.history.back();
+  }
+</script>
+
+<!-- Remaining carry-over libraries -->
+<script src="js/queue.v1.min.js"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+</body>
+</html>

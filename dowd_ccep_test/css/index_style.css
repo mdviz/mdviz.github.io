@@ -1,0 +1,239 @@
+/* Stuff from @kuanb */
+body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  font-size: 13px;
+}
+
+body, h1, h2, h3, h4, h5 {
+  font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#countyLeafletMap {
+  min-height: 300px;
+  /*overflow-y: scroll;*/
+  z-index: 0;
+}
+
+#select-county-navbar{
+  margin-bottom: 0px;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.sharp-edges {
+  border-radius: 0px;
+}
+
+
+.footer {
+  padding: 6px 0 5px 0;
+  background-color: #072F53;
+  color: white;
+  line-height: 15px;
+}
+
+.footer img {
+  height: 20px;
+}
+
+.footer a {
+  text-decoration: none;
+  color: white;
+}
+
+
+/* Added by @mdgis */
+.leafletMapBLBox {
+  padding: 6px 8px;
+  font: 13px/15px Arial, Helvetica, sans-serif;
+  background: rgba(255,255,255,0.9);
+  border-radius: 0;
+}
+.leafletMapBLBox h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+.leafletMapBLBox .legend {
+  line-height: 18px;
+  color: #555;
+
+}
+
+
+.leafletMapBLBox .leftColorMapBox {
+  width: 30px;
+  height: 15px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+.leafletMapBLBox .leftNumVal {
+  padding-right: 10px;
+}
+
+
+
+.countyTitle{
+  font-weight: bold;
+  font-size: 25px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+
+#methodfoot {
+  position:absolute;
+   bottom:0;
+   width:100%;
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    position: fixed;
+    bottom: 0pt;
+    left: 0pt;
+ }
+
+.legendLinkSpan:hover  {
+  text-decoration: underline ;
+}
+
+.kbdkeys {
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  padding: 3px 5px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.accessItem {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+
+.beta-version {
+  font-size: inherit;
+  background-color: #f0ad4c;
+}
+
+
+.dk-how-to{
+  margin-bottom: 20px;
+}
+
+.dk-bottom-right {
+    position: absolute;
+    bottom: -1px;
+    right: 12px;
+    background-color: white;
+    padding: 5px 5px;
+    border-top-left-radius:5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+/* Stuff from before */
+h1, h2, h3, h4, h5 {
+  font-weight: bold;
+}
+p {
+  font-size: 1.1em;
+  line-height: 1.4em;
+  margin-bottom: 15px;
+}
+
+.nav > li.disabled.nav-header > a {
+  cursor: default;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px 10px !important;
+  color: #000;
+}
+
+.align-right { text-align: right; }
+.align-left { text-align: left; }
+
+.posrel { position: relative; }
+.posabs { position: absolute; }
+.posfixed { position: fixed; }
+
+#nav-panel {
+  background-color: #f8f8f8;
+  width: 300px;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+#nav-panel h4, h5 {
+  padding-left: 10px;
+  padding-right: 15px;
+}
+
+#nav-panel  h5 {
+  font-size: 16px;
+}
+.nav-pills > li > a {
+  border-radius: 0px;
+  color: #444;
+  background-color: #F0F4F8;
+}
+.nav-pills > li > a:hover {
+  background-color: #D8DCE2
+}
+.nav-pills > li.selected > a {
+  background-color: #C6CEDA;
+  color: #000;
+}
+
+
+
+#main-container {
+  top: 0px;
+  left: 0px;
+  background-color: #FFF;
+  width: 100%;
+  -webkit-box-shadow: 0px 0px 15px #CCC;
+  -moz-box-shadow: 0px 0px 15px #CCC;
+  box-shadow: 0px 0px 15px #CCC;
+}
+#content-wrapper {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#nav-panel {
+  /*height: 600px;*/
+  overflow: scroll;
+}
+
+#nav-panel .nav > li > a {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#nav-panel .nav > li.selected > a {
+    padding-right: 25px;
+
+}
+
+#nav-panel .label {
+  position: relative;
+  top: -3px;
+}
+
